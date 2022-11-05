@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="EVV-2-add-default-languages-values" author="efimov.vv">
+        <insert tableName="language">
+            <column name="short_name">en</column>
+            <column name="full_name">english</column>
+        </insert>
+        <insert tableName="language">
+            <column name="short_name">ru</column>
+            <column name="full_name">русский</column>
+        </insert>
+        <insert tableName="language">
+            <column name="short_name">pl</column>
+            <column name="full_name">polski</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
