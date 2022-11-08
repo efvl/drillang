@@ -3,6 +3,7 @@ package app.prog.evv.drillang.controller;
 import app.prog.evv.drillang.dto.LanguageDto;
 import app.prog.evv.drillang.dto.LanguageSearchRequest;
 import app.prog.evv.drillang.service.LangService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class LangController {
     }
 
 
+    @Operation(description = "Getting the Language type")
     @GetMapping("/{id}")
     public ResponseEntity<LanguageDto> getLanguage(@PathVariable Long id){
         return ResponseEntity.ok(langService.findById(id));
