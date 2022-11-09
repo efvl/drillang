@@ -4,6 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-    <include file="EVV-1-create-language-table.xml" relativeToChangelogFile="true"/>
-    <include file="EVV-2-add-default-languages-values.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-language-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-default-languages-values.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-picture-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-audio-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-wordcard-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-language-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-picture-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-audio-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-    <changeSet id="EVV-1-create-language-table" author="efimov.vv">
+    <changeSet id="WCARD-create-language-table" author="efimov.vv">
         <createTable tableName="language">
             <column name="id" type="INT8" autoIncrement="true">
                 <constraints primaryKey="true"/>

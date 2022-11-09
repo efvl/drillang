@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-picture-table" author="efimov.vv">
+        <createTable tableName="picture">
+            <column name="id" type="int8" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="content" type="blob"/>
+            <column name="name" type="varchar(256)"/>
+            <column name="size" type="int8"/>
+            <column name="extension" type="varchar(16)"/>
+            <column name="date_created" type="timestamptz"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
