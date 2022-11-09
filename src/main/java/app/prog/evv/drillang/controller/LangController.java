@@ -2,8 +2,13 @@ package app.prog.evv.drillang.controller;
 
 import app.prog.evv.drillang.dto.LanguageDto;
 import app.prog.evv.drillang.dto.LanguageSearchRequest;
+import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.LangService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +25,24 @@ public class LangController {
         this.langService = langService;
     }
 
-
+    @ApiResponses({
+        @ApiResponse(
+            responseCode = "200",
+            description = "successfil operation",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = LanguageDto.class)
+            )
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Not found",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ApiError.class)
+            )
+        )
+    })
     @Operation(description = "Getting the Language type")
     @GetMapping("/{id}")
     public ResponseEntity<LanguageDto> getLanguage(@PathVariable Long id){

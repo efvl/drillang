@@ -3,6 +3,7 @@ package app.prog.evv.drillang.service;
 import app.prog.evv.drillang.dto.LanguageDto;
 import app.prog.evv.drillang.dto.LanguageSearchRequest;
 import app.prog.evv.drillang.entity.Language;
+import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.LangMapper;
 import app.prog.evv.drillang.repository.LangRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class LangServiceImpl implements LangService {
     public LanguageDto findById(Long id) {
         return langRepository.findById(id)
                 .map(langMapper::toDto)
-                .orElseThrow(() -> new RuntimeException(String.format("language not found (id=%d)", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("language not found (id=%d)", id)));
     }
 
     @Override
