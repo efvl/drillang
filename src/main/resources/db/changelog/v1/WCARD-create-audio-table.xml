@@ -10,9 +10,9 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="content" type="blob"/>
-            <column name="name" type="varchar(256)"/>
+            <column name="file_name" type="varchar(256)"/>
             <column name="size" type="int8"/>
-            <column name="extension" type="varchar(16)"/>
+            <column name="content_type" type="varchar(16)"/>
             <column name="date_created" type="timestamptz"/>
         </createTable>
     </changeSet>
