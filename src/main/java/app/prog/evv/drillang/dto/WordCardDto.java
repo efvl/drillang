@@ -28,6 +28,6 @@ public class WordCardDto {
 
     private AudioFileDto audio;
 
-    private Instant createdDate;
+    private Instant dateCreated;
 
 }

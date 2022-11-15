@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/v1/lang")
+@CrossOrigin
 public class LangController {
 
     private final LangService langService;

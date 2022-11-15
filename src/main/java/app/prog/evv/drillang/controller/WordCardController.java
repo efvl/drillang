@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController()
-@RequestMapping(path = "/v1/word-card/")
+@RequestMapping(path = "/v1/word-card")
+@CrossOrigin
 public class WordCardController {
 
     private final WordCardService wordCardService;

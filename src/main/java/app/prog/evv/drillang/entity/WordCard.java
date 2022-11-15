@@ -15,7 +15,7 @@ import java.time.Instant;
 public class WordCard extends BaseUniqueEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "language_id")
+    @JoinColumn(name = "lang_id")
     private Language language;
 
     @Column(name = "word")
@@ -35,7 +35,7 @@ public class WordCard extends BaseUniqueEntity{
     @JoinColumn(name = "audio_id")
     private AudioFile audio;
 
-    @Column(name = "created_date")
-    private Instant createdDate;
+    @Column(name = "date_created")
+    private Instant dateCreated;
 
 }
