@@ -1,8 +1,9 @@
-package app.prog.evv.drillang.dto;
+package app.prog.evv.drillang.dto.wordCard;
 
-import app.prog.evv.drillang.entity.AudioFile;
-import app.prog.evv.drillang.entity.Language;
-import app.prog.evv.drillang.entity.PictureFile;
+import app.prog.evv.drillang.dto.AudioFileDto;
+import app.prog.evv.drillang.dto.LanguageDto;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileDto;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,9 @@ public class WordCardDto {
 
     private String example;
 
-    private PictureFileDto picture;
+    private Long pictureId;
 
-    private AudioFileDto audio;
+    private Long audioId;
 
     private Instant dateCreated;
 

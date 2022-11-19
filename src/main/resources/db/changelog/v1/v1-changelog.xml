@@ -12,4 +12,5 @@
     <include file="WCARD-add-language-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-picture-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-audio-fk-to-wordcard.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-checksum-to-picture-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

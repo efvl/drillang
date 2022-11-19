@@ -33,4 +33,7 @@ public class PictureFile extends BaseUniqueEntity {
     @Column(name = "date_created")
     private Instant createdDate;
 
+    @Column(name = "checksum")
+    private String checksum;
+
 }

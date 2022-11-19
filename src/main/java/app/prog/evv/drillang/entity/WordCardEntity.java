@@ -12,7 +12,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @Entity
 @Table(name = "word_card")
-public class WordCard extends BaseUniqueEntity{
+public class WordCardEntity extends BaseUniqueEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lang_id")
@@ -27,13 +27,11 @@ public class WordCard extends BaseUniqueEntity{
     @Column(name = "example")
     private String example;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "picture_id")
-    private PictureFile picture;
+    @Column(name = "picture_id")
+    private Long pictureId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "audio_id")
-    private AudioFile audio;
+    @Column(name = "audio_id")
+    private Long audioId;
 
     @Column(name = "date_created")
     private Instant dateCreated;

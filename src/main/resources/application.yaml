@@ -9,6 +9,9 @@ spring:
     username: vova
     password: adminvova
     driver-class-name: org.postgresql.Driver
+    autoCommit: false
+    hikari:
+      auto-commit: false
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

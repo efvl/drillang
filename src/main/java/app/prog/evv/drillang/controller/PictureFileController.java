@@ -1,8 +1,8 @@
 package app.prog.evv.drillang.controller;
 
-import app.prog.evv.drillang.dto.AudioFileDto;
-import app.prog.evv.drillang.dto.PictureFileDto;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileDto;
 import app.prog.evv.drillang.dto.PictureFileSearchRequest;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.PictureFileService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/v1/picture/")
+@RequestMapping(path = "/v1/picture")
+@CrossOrigin
 public class PictureFileController {
 
     private final PictureFileService pictureFileService;
@@ -59,7 +60,7 @@ public class PictureFileController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<PictureFileDto> createPictureFile(@RequestPart MultipartFile pictureFile){
+    public ResponseEntity<PictureFileInfo> createPictureFile(@RequestParam(name = "picFile") MultipartFile pictureFile){
         return ResponseEntity.ok(pictureFileService.createPictureFile(pictureFile)) ;
     }
 

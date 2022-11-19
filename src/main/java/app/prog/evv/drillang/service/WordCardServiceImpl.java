@@ -1,8 +1,8 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.WordCardDto;
+import app.prog.evv.drillang.dto.wordCard.WordCardDto;
 import app.prog.evv.drillang.dto.WordCardSearchRequest;
-import app.prog.evv.drillang.entity.WordCard;
+import app.prog.evv.drillang.entity.WordCardEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.WordCardMapper;
 import app.prog.evv.drillang.repository.WordCardRepository;
@@ -17,31 +17,33 @@ import java.util.stream.Collectors;
 public class WordCardServiceImpl implements WordCardService {
 
     private final WordCardRepository wordCardRepository;
-
     private final WordCardMapper wordCardMapper;
+    private final PictureFileService pictureFileService;
 
-    public WordCardServiceImpl(WordCardRepository wordCardRepository, WordCardMapper wordCardMapper) {
+
+    public WordCardServiceImpl(WordCardRepository wordCardRepository, WordCardMapper wordCardMapper, PictureFileService pictureFileService) {
         this.wordCardRepository = wordCardRepository;
         this.wordCardMapper = wordCardMapper;
+        this.pictureFileService = pictureFileService;
     }
 
     @Override
     public WordCardDto findById(Long id) {
-        return wordCardRepository.findById(id)
-                .map(wordCardMapper::toDto)
+        WordCardEntity entity = wordCardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("word card not found (id=%d)", id)));
+        return wordCardMapper.toDto(entity);
     }
 
     @Override
     public WordCardDto createWordCard(WordCardDto wordCardDto) {
         wordCardDto.setDateCreated(Instant.now());
-        WordCard created = wordCardRepository.save(wordCardMapper.toEntity(wordCardDto));
+        WordCardEntity created = wordCardRepository.save(wordCardMapper.toEntity(wordCardDto));
         return wordCardMapper.toDto(created);
     }
 
     @Override
     public WordCardDto updateWordCard(WordCardDto wordCardDto) {
-        Optional<WordCard> existing = wordCardRepository.findById(wordCardDto.getId());
+        Optional<WordCardEntity> existing = wordCardRepository.findById(wordCardDto.getId());
         WordCardDto updated = new WordCardDto();
         if(existing.isPresent()){
             updated = wordCardMapper.toDto(wordCardRepository.save(wordCardMapper.toEntity(wordCardDto)));

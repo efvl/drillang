@@ -1,6 +1,6 @@
 package app.prog.evv.drillang.controller;
 
-import app.prog.evv.drillang.dto.WordCardDto;
+import app.prog.evv.drillang.dto.wordCard.WordCardDto;
 import app.prog.evv.drillang.dto.WordCardSearchRequest;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.WordCardService;
@@ -50,8 +50,8 @@ public class WordCardController {
     }
 
     @PostMapping
-    public ResponseEntity<WordCardDto> createWordCard(@RequestBody WordCardDto WordCardDto){
-        return ResponseEntity.ok(wordCardService.createWordCard(WordCardDto)) ;
+    public ResponseEntity<WordCardDto> createWordCard(@RequestBody WordCardDto wordCardDto){
+        return ResponseEntity.ok(wordCardService.createWordCard(wordCardDto)) ;
     }
 
     @PutMapping

@@ -1,16 +1,18 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.PictureFileDto;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileDto;
 import app.prog.evv.drillang.dto.PictureFileSearchRequest;
-import app.prog.evv.drillang.entity.AudioFile;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
 import app.prog.evv.drillang.entity.PictureFile;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.PictureFileMapper;
 import app.prog.evv.drillang.repository.PictureFileRepository;
+import app.prog.evv.drillang.utils.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -36,20 +38,39 @@ public class PictureFileServiceImpl implements PictureFileService {
     }
 
     @Override
-    public PictureFileDto createPictureFile(MultipartFile pictureFile) {
+    public PictureFile findEntityById(Long id) {
+        return pictureFileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("pucture file not found (id=%d)", id)));
+    }
+
+    @Override
+    public boolean isExistsById(Long id) {
+        return pictureFileRepository.existsById(id);
+    }
+
+    @Override
+    public PictureFileInfo createPictureFile(MultipartFile pictureFile) {
         PictureFile file = new PictureFile();
-        file.setFileName(pictureFile.getOriginalFilename());
         try {
+            String checksum = FileUtils.calcChecksum(pictureFile.getBytes());
+            Optional<PictureFile> existing = pictureFileRepository.findByChecksum(checksum)
+                    .stream().findFirst();
+            if(existing.isPresent()){
+                return pictureFileMapper.toPictureInfo(existing.get());
+            }
             file.setContent(pictureFile.getBytes());
+            file.setChecksum(checksum);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        file.setFileName(pictureFile.getOriginalFilename());
         file.setContentType(pictureFile.getContentType());
         file.setSize(pictureFile.getSize());
         file.setCreatedDate(Instant.now());
-
         PictureFile created = pictureFileRepository.save(file);
-        return pictureFileMapper.toDto(created);
+        return pictureFileMapper.toPictureInfo(created);
     }
 
     @Override

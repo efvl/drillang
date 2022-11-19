@@ -1,4 +1,4 @@
-package app.prog.evv.drillang.dto;
+package app.prog.evv.drillang.dto.wordPicture;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +22,7 @@ public class PictureFileDto {
     private String contentType;
 
     private Instant createdDate;
+
+    private String checksum;
 
 }
