@@ -1,7 +1,6 @@
 package app.prog.evv.drillang.dto.wordCard;
 
-import app.prog.evv.drillang.dto.LanguageDto;
-import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
+import app.prog.evv.drillang.dto.lang.LanguageDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

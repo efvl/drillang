@@ -1,7 +1,7 @@
 package app.prog.evv.drillang.controller;
 
-import app.prog.evv.drillang.dto.LanguageDto;
-import app.prog.evv.drillang.dto.LanguageSearchRequest;
+import app.prog.evv.drillang.dto.lang.LanguageDto;
+import app.prog.evv.drillang.dto.lang.LanguageSearchRequest;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.LangService;
 import io.swagger.v3.oas.annotations.Operation;

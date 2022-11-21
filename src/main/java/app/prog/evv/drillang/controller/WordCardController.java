@@ -1,7 +1,7 @@
 package app.prog.evv.drillang.controller;
 
 import app.prog.evv.drillang.dto.wordCard.WordCardDto;
-import app.prog.evv.drillang.dto.WordCardSearchRequest;
+import app.prog.evv.drillang.dto.wordCard.WordCardSearchRequest;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.WordCardService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,7 +66,7 @@ public class WordCardController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<List<WordCardDto>> searchWordCards(@RequestBody WordCardSearchRequest searchRequest){
+    public ResponseEntity<Page<WordCardDto>> searchWordCards(@RequestBody WordCardSearchRequest searchRequest){
         return ResponseEntity.ok().body(wordCardService.searchWordCards(searchRequest));
     }
 

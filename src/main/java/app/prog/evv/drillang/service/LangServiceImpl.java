@@ -1,7 +1,7 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.LanguageDto;
-import app.prog.evv.drillang.dto.LanguageSearchRequest;
+import app.prog.evv.drillang.dto.lang.LanguageDto;
+import app.prog.evv.drillang.dto.lang.LanguageSearchRequest;
 import app.prog.evv.drillang.entity.Language;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.LangMapper;

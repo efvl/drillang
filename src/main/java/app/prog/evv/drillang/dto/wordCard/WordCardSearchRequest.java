@@ -1,4 +1,4 @@
-package app.prog.evv.drillang.dto;
+package app.prog.evv.drillang.dto.wordCard;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,5 +14,9 @@ public class WordCardSearchRequest {
     private String language;
 
     private String word;
+
+    private int curNumPage;
+
+    private int sizeOfPage;
 
 }

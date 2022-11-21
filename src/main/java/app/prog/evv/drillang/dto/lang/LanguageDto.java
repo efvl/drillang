@@ -1,4 +1,4 @@
-package app.prog.evv.drillang.dto;
+package app.prog.evv.drillang.dto.lang;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

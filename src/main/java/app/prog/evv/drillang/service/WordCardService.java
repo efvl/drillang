@@ -1,9 +1,8 @@
 package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.wordCard.WordCardDto;
-import app.prog.evv.drillang.dto.WordCardSearchRequest;
-
-import java.util.List;
+import app.prog.evv.drillang.dto.wordCard.WordCardSearchRequest;
+import org.springframework.data.domain.Page;
 
 public interface WordCardService {
 
@@ -15,6 +14,6 @@ public interface WordCardService {
 
     void deleteWordCardById(Long id);
 
-    List<WordCardDto> searchWordCards(WordCardSearchRequest request);
+    Page<WordCardDto> searchWordCards(WordCardSearchRequest request);
 
 }

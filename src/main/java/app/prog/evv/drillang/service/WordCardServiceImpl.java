@@ -1,17 +1,17 @@
 package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.wordCard.WordCardDto;
-import app.prog.evv.drillang.dto.WordCardSearchRequest;
+import app.prog.evv.drillang.dto.wordCard.WordCardSearchRequest;
 import app.prog.evv.drillang.entity.WordCardEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.WordCardMapper;
 import app.prog.evv.drillang.repository.WordCardRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class WordCardServiceImpl implements WordCardService {
@@ -57,10 +57,8 @@ public class WordCardServiceImpl implements WordCardService {
     }
 
     @Override
-    public List<WordCardDto> searchWordCards(WordCardSearchRequest request) {
-        return wordCardRepository.findAll()
-                .stream()
-                .map(wordCardMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<WordCardDto> searchWordCards(WordCardSearchRequest request) {
+        PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
+        return wordCardRepository.findAll(pageRequest).map(wordCardMapper::toDto);
     }
 }

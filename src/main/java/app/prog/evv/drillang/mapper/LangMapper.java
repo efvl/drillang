@@ -1,6 +1,6 @@
 package app.prog.evv.drillang.mapper;
 
-import app.prog.evv.drillang.dto.LanguageDto;
+import app.prog.evv.drillang.dto.lang.LanguageDto;
 import app.prog.evv.drillang.entity.Language;
 import org.mapstruct.Mapper;
 

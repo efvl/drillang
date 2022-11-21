@@ -1,7 +1,7 @@
 package app.prog.evv.drillang.controller;
 
 import app.prog.evv.drillang.dto.wordPicture.PictureFileDto;
-import app.prog.evv.drillang.dto.PictureFileSearchRequest;
+import app.prog.evv.drillang.dto.wordPicture.PictureFileSearchRequest;
 import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.PictureFileService;
