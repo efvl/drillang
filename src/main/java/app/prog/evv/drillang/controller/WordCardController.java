@@ -50,21 +50,25 @@ public class WordCardController {
         return ResponseEntity.ok(wordCardService.findById(id));
     }
 
+    @Operation(description = "Create new Word Card")
     @PostMapping
     public ResponseEntity<WordCardDto> createWordCard(@RequestBody WordCardDto wordCardDto){
         return ResponseEntity.ok(wordCardService.createWordCard(wordCardDto)) ;
     }
 
+    @Operation(description = "Update Word Card")
     @PutMapping
     public ResponseEntity<WordCardDto> updateWordCard(@RequestBody WordCardDto WordCardDto){
         return ResponseEntity.ok(wordCardService.updateWordCard(WordCardDto));
     }
 
+    @Operation(description = "Delete Word Card")
     @DeleteMapping("/{id}")
     public void deleteWordCard(@PathVariable Long id){
         wordCardService.deleteWordCardById(id);
     }
 
+    @Operation(description = "Search Word Cards by searching params")
     @PostMapping("/search")
     public ResponseEntity<Page<WordCardDto>> searchWordCards(@RequestBody WordCardSearchRequest searchRequest){
         return ResponseEntity.ok().body(wordCardService.searchWordCards(searchRequest));

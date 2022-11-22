@@ -19,7 +19,7 @@ public class TranslateEntity extends BaseUniqueEntity {
     private WordCardEntity word1;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "word2_id")
     private WordCardEntity word2;
 
