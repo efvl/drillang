@@ -1,14 +1,14 @@
 package app.prog.evv.drillang.mapper;
 
 import app.prog.evv.drillang.dto.lang.LanguageDto;
-import app.prog.evv.drillang.entity.Language;
+import app.prog.evv.drillang.entity.LanguageEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface LangMapper {
 
-    LanguageDto toDto(Language entity);
+    LanguageDto toDto(LanguageEntity entity);
 
-    Language toEntity(LanguageDto dto);
+    LanguageEntity toEntity(LanguageDto dto);
 
 }

@@ -2,7 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.lang.LanguageDto;
 import app.prog.evv.drillang.dto.lang.LanguageSearchRequest;
-import app.prog.evv.drillang.entity.Language;
+import app.prog.evv.drillang.entity.LanguageEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.LangMapper;
 import app.prog.evv.drillang.repository.LangRepository;
@@ -39,7 +39,7 @@ public class LangServiceImpl implements LangService {
 
     @Override
     public LanguageDto updateLanguage(LanguageDto languageDto) {
-        Optional<Language> existing = langRepository.findById(languageDto.getId());
+        Optional<LanguageEntity> existing = langRepository.findById(languageDto.getId());
         LanguageDto updated = new LanguageDto();
         if(existing.isPresent()){
             updated = langMapper.toDto(langRepository.save(langMapper.toEntity(languageDto)));
@@ -49,7 +49,7 @@ public class LangServiceImpl implements LangService {
 
     @Override
     public LanguageDto createLanguage(LanguageDto languageDto) {
-        Language created = langRepository.save(langMapper.toEntity(languageDto));
+        LanguageEntity created = langRepository.save(langMapper.toEntity(languageDto));
         return langMapper.toDto(created);
     }
 

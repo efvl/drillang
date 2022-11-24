@@ -2,7 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.AudioFileDto;
 import app.prog.evv.drillang.dto.AudioFileSearchRequest;
-import app.prog.evv.drillang.entity.AudioFile;
+import app.prog.evv.drillang.entity.AudioFileEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.AudioFileMapper;
 import app.prog.evv.drillang.repository.AudioFileRepository;
@@ -37,7 +37,7 @@ public class AudioFileServiceImpl implements AudioFileService {
 
     @Override
     public AudioFileDto createAudioFile(MultipartFile audioFile) {
-        AudioFile file = new AudioFile();
+        AudioFileEntity file = new AudioFileEntity();
         file.setFileName(audioFile.getOriginalFilename());
         try {
             file.setContent(audioFile.getBytes());
@@ -48,13 +48,13 @@ public class AudioFileServiceImpl implements AudioFileService {
         file.setSize(audioFile.getSize());
         file.setCreatedDate(Instant.now());
 
-        AudioFile created = audioFileRepository.save(file);
+        AudioFileEntity created = audioFileRepository.save(file);
         return audioFileMapper.toDto(created);
     }
 
     @Override
     public AudioFileDto updateAudioFile(AudioFileDto audioFileDto) {
-        Optional<AudioFile> existing = audioFileRepository.findById(audioFileDto.getId());
+        Optional<AudioFileEntity> existing = audioFileRepository.findById(audioFileDto.getId());
         AudioFileDto updated = new AudioFileDto();
         if(existing.isPresent()){
             updated = audioFileMapper.toDto(audioFileRepository.save(audioFileMapper.toEntity(audioFileDto)));

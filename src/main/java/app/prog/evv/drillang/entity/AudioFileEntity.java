@@ -11,11 +11,11 @@ import javax.persistence.Table;
 import java.time.Instant;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "picture")
-public class PictureFile extends BaseUniqueEntity {
+@Table(name = "audio")
+public class AudioFileEntity extends BaseUniqueEntity{
 
     @Lob
     @Column(name = "content")
@@ -32,8 +32,5 @@ public class PictureFile extends BaseUniqueEntity {
 
     @Column(name = "date_created")
     private Instant createdDate;
-
-    @Column(name = "checksum")
-    private String checksum;
 
 }

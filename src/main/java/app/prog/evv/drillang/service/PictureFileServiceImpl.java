@@ -3,7 +3,7 @@ package app.prog.evv.drillang.service;
 import app.prog.evv.drillang.dto.wordPicture.PictureFileDto;
 import app.prog.evv.drillang.dto.wordPicture.PictureFileSearchRequest;
 import app.prog.evv.drillang.dto.wordPicture.PictureFileInfo;
-import app.prog.evv.drillang.entity.PictureFile;
+import app.prog.evv.drillang.entity.PictureFileEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.PictureFileMapper;
 import app.prog.evv.drillang.repository.PictureFileRepository;
@@ -38,7 +38,7 @@ public class PictureFileServiceImpl implements PictureFileService {
     }
 
     @Override
-    public PictureFile findEntityById(Long id) {
+    public PictureFileEntity findEntityById(Long id) {
         return pictureFileRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("pucture file not found (id=%d)", id)));
     }
@@ -50,10 +50,10 @@ public class PictureFileServiceImpl implements PictureFileService {
 
     @Override
     public PictureFileInfo createPictureFile(MultipartFile pictureFile) {
-        PictureFile file = new PictureFile();
+        PictureFileEntity file = new PictureFileEntity();
         try {
             String checksum = FileUtils.calcChecksum(pictureFile.getBytes());
-            Optional<PictureFile> existing = pictureFileRepository.findByChecksum(checksum)
+            Optional<PictureFileEntity> existing = pictureFileRepository.findByChecksum(checksum)
                     .stream().findFirst();
             if(existing.isPresent()){
                 return pictureFileMapper.toPictureInfo(existing.get());
@@ -69,13 +69,13 @@ public class PictureFileServiceImpl implements PictureFileService {
         file.setContentType(pictureFile.getContentType());
         file.setSize(pictureFile.getSize());
         file.setCreatedDate(Instant.now());
-        PictureFile created = pictureFileRepository.save(file);
+        PictureFileEntity created = pictureFileRepository.save(file);
         return pictureFileMapper.toPictureInfo(created);
     }
 
     @Override
     public PictureFileDto updatePictureFile(PictureFileDto pictureFileDto) {
-        Optional<PictureFile> existing = pictureFileRepository.findById(pictureFileDto.getId());
+        Optional<PictureFileEntity> existing = pictureFileRepository.findById(pictureFileDto.getId());
         PictureFileDto edited = new PictureFileDto();
         if(existing.isPresent()){
             edited = pictureFileMapper.toDto(pictureFileRepository.save(pictureFileMapper.toEntity(pictureFileDto)));

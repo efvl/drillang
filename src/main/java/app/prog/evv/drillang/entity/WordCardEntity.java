@@ -16,7 +16,7 @@ public class WordCardEntity extends BaseUniqueEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lang_id")
-    private Language language;
+    private LanguageEntity language;
 
     @Column(name = "word")
     private String word;

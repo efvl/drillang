@@ -1,14 +1,14 @@
 package app.prog.evv.drillang.mapper;
 
 import app.prog.evv.drillang.dto.AudioFileDto;
-import app.prog.evv.drillang.entity.AudioFile;
+import app.prog.evv.drillang.entity.AudioFileEntity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface AudioFileMapper {
 
-    AudioFileDto toDto(AudioFile entity);
+    AudioFileDto toDto(AudioFileEntity entity);
 
-    AudioFile toEntity(AudioFileDto dto);
+    AudioFileEntity toEntity(AudioFileDto dto);
 
 }

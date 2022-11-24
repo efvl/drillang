@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "language")
-public class Language extends BaseUniqueEntity{
+public class LanguageEntity extends BaseUniqueEntity{
 
     @Column(name = "short_name")
     private String shortName;
