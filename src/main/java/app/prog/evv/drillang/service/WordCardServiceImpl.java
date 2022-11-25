@@ -6,6 +6,7 @@ import app.prog.evv.drillang.entity.WordCardEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.WordCardMapper;
 import app.prog.evv.drillang.repository.WordCardRepository;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,9 @@ public class WordCardServiceImpl implements WordCardService {
     @Override
     public Page<WordCardDto> searchWordCards(WordCardSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
+        if (ObjectUtils.isNotEmpty(request.getLanguageId())) {
+            return wordCardRepository.findByLanguageId(pageRequest, request.getLanguageId()).map(wordCardMapper::toDto);
+        }
         return wordCardRepository.findAll(pageRequest).map(wordCardMapper::toDto);
     }
 }

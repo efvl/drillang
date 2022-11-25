@@ -13,6 +13,8 @@ public class WordCardSearchRequest {
 
     private String language;
 
+    private Long languageId;
+
     private String word;
 
     private int curNumPage;
