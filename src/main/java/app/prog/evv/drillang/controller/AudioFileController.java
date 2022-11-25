@@ -1,7 +1,8 @@
 package app.prog.evv.drillang.controller;
 
-import app.prog.evv.drillang.dto.AudioFileDto;
-import app.prog.evv.drillang.dto.AudioFileSearchRequest;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileDto;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileInfo;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileSearchRequest;
 import app.prog.evv.drillang.exception.ApiError;
 import app.prog.evv.drillang.service.AudioFileService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,7 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "v1/audio/")
+@RequestMapping(path = "v1/audio")
+@CrossOrigin
 public class AudioFileController {
 
     private final AudioFileService audioFileService;
@@ -59,12 +61,12 @@ public class AudioFileController {
     }
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<AudioFileDto> createAudioFile(@RequestPart MultipartFile audioFile){
+    public ResponseEntity<AudioFileInfo> createAudioFile(@RequestParam(name = "audFile") MultipartFile audioFile){
         return ResponseEntity.ok(audioFileService.createAudioFile(audioFile));
     }
 
     @PutMapping
-    public ResponseEntity<AudioFileDto> updateAudioFile(@RequestBody AudioFileDto AudioFileDto){
+    public ResponseEntity<AudioFileInfo> updateAudioFile(@RequestBody AudioFileDto AudioFileDto){
         return ResponseEntity.ok(audioFileService.updateAudioFile(AudioFileDto));
     }
 

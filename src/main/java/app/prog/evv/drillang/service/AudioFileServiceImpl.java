@@ -1,15 +1,18 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.AudioFileDto;
-import app.prog.evv.drillang.dto.AudioFileSearchRequest;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileDto;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileInfo;
+import app.prog.evv.drillang.dto.wordAudio.AudioFileSearchRequest;
 import app.prog.evv.drillang.entity.AudioFileEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.AudioFileMapper;
 import app.prog.evv.drillang.repository.AudioFileRepository;
+import app.prog.evv.drillang.utils.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -36,28 +39,37 @@ public class AudioFileServiceImpl implements AudioFileService {
     }
 
     @Override
-    public AudioFileDto createAudioFile(MultipartFile audioFile) {
+    public AudioFileInfo createAudioFile(MultipartFile audioFile) {
         AudioFileEntity file = new AudioFileEntity();
         file.setFileName(audioFile.getOriginalFilename());
         try {
+            String checksum = FileUtils.calcChecksum(audioFile.getBytes());
+            Optional<AudioFileEntity> existing = audioFileRepository.findByChecksum(checksum)
+                    .stream().findFirst();
+            if(existing.isPresent()){
+                return audioFileMapper.toAudioInfo(existing.get());
+            }
             file.setContent(audioFile.getBytes());
+            file.setChecksum(checksum);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
         file.setContentType(audioFile.getContentType());
+        file.setContentType(audioFile.getContentType());
         file.setSize(audioFile.getSize());
         file.setCreatedDate(Instant.now());
-
         AudioFileEntity created = audioFileRepository.save(file);
-        return audioFileMapper.toDto(created);
+        return audioFileMapper.toAudioInfo(created);
     }
 
     @Override
-    public AudioFileDto updateAudioFile(AudioFileDto audioFileDto) {
+    public AudioFileInfo updateAudioFile(AudioFileDto audioFileDto) {
         Optional<AudioFileEntity> existing = audioFileRepository.findById(audioFileDto.getId());
-        AudioFileDto updated = new AudioFileDto();
+        AudioFileInfo updated = new AudioFileInfo();
         if(existing.isPresent()){
-            updated = audioFileMapper.toDto(audioFileRepository.save(audioFileMapper.toEntity(audioFileDto)));
+            updated = audioFileMapper.toAudioInfo(audioFileRepository.save(audioFileMapper.toEntity(audioFileDto)));
         }
         return updated;
     }

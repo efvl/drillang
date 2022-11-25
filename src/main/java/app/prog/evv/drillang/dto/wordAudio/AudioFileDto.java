@@ -1,4 +1,4 @@
-package app.prog.evv.drillang.dto;
+package app.prog.evv.drillang.dto.wordAudio;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
