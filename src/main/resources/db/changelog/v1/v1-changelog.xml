@@ -16,4 +16,8 @@
     <include file="WCARD-create-translate-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-fk-to-translate-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-checksum-to-audio-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-word-lesson-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-fk-to-word-lesson-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-translate-word-lesson-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-fk-to-translate-word-lesson-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

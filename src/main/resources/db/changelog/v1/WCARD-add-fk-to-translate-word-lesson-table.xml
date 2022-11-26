@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-add-fk-to-translate-word-lesson-table.xml" author="evv">
+        <addForeignKeyConstraint baseColumnNames="translate_id" baseTableName="translate_word_lesson"
+                                 constraintName="fk_tr_word_lesson_tr"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="translate"/>
+        <addForeignKeyConstraint baseColumnNames="word_lesson_id" baseTableName="translate_word_lesson"
+                                 constraintName="fk_tr_word_lesson_wlesson"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="word_lesson"/>
+    </changeSet>
+</databaseChangeLog>

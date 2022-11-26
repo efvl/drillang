@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-translate-word-lesson-table" author="evv">
+        <createTable tableName="translate_word_lesson">
+            <column name="id" type="int8" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="translate_id" type="int8"/>
+            <column name="word_lesson_id" type="int8"/>
+            <column name="target_answer" type="int4"/>
+            <column name="all_answer" type="int4"/>
+            <column name="correct_answer" type="int4"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
