@@ -1,5 +1,6 @@
 package app.prog.evv.drillang.controller;
 
+import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
 import app.prog.evv.drillang.service.TranslateWordLessonService;
@@ -7,6 +8,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/v1/translate-wlesson")
@@ -47,5 +50,11 @@ public class TranslateWordLessonController {
     @PostMapping("/search")
     public ResponseEntity<Page<TranslateWordLesson>> searchTranslateWLessons(@RequestBody TranslateWordLessonSearchRequest searchRequest){
         return ResponseEntity.ok().body(translateWordLessonService.searchTranslateWordLessons(searchRequest));
+    }
+
+    @Operation(description = "Get All Translates For Lesson by id")
+    @GetMapping("/by-lesson/{id}")
+    public ResponseEntity<Set<TranslateWLessonInfo>> searchTranslateForLesson(@PathVariable Long id){
+        return ResponseEntity.ok().body(translateWordLessonService.getTranslatesForLesson(id));
     }
 }

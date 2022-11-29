@@ -1,8 +1,12 @@
 package app.prog.evv.drillang.service;
 
+import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
+import app.prog.evv.drillang.dto.translate.Translate;
 import org.springframework.data.domain.Page;
+
+import java.util.Set;
 
 public interface TranslateWordLessonService {
 
@@ -15,5 +19,7 @@ public interface TranslateWordLessonService {
     void deleteTranslateWordLessonById(Long id);
 
     Page<TranslateWordLesson> searchTranslateWordLessons(TranslateWordLessonSearchRequest request);
+
+    Set<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId);
 
 }

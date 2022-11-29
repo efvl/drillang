@@ -1,5 +1,6 @@
 package app.prog.evv.drillang.service;
 
+import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
 import app.prog.evv.drillang.entity.TranslateWordLessonEntity;
@@ -11,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TranslateWordLessonServiceImpl implements TranslateWordLessonService {
@@ -59,4 +62,11 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
         return translateWordLessonRepository.findAll(pageRequest).map(translateWordLessonMapper::toDto);
     }
+
+    @Override
+    public Set<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId) {
+        return translateWordLessonRepository.findByWordLessonId(lessonId).stream()
+                .map(translateWordLessonMapper::toInfoDto).collect(Collectors.toSet());
+    }
+
 }
