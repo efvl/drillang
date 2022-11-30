@@ -4,6 +4,7 @@ import app.prog.evv.drillang.dto.translate.Translate;
 import app.prog.evv.drillang.dto.translate.TranslateSearchRequest;
 import app.prog.evv.drillang.service.TranslateService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,12 @@ public class TranslateController {
     @PostMapping("/search")
     ResponseEntity<Page<Translate>> searchTranslate(@RequestBody TranslateSearchRequest searchRequest){
         return  ResponseEntity.ok(translateService.searchTranslate(searchRequest));
+    }
+
+    @Operation(description = "Search Translations compatible for lesson")
+    @PostMapping("/search/for-lesson")
+    ResponseEntity<Page<Translate>> searchTranslateByLang(@RequestBody TranslateSearchRequest searchRequest){
+        return  ResponseEntity.ok(translateService.searchTranslateForLesson(searchRequest));
     }
 
 }

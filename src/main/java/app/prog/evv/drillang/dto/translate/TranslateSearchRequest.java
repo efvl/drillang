@@ -11,6 +11,8 @@ public class TranslateSearchRequest {
 
     Long languageId;
 
+    Long lessonId;
+
     String word;
 
     private int curNumPage;

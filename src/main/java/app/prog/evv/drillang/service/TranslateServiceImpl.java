@@ -67,7 +67,21 @@ public class TranslateServiceImpl implements TranslateService {
     @Override
     public Page<Translate> searchTranslate(TranslateSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
-        return translateRepository.findAll(pageRequest).map(translateMapper::toDto);
+        return translateRepository.findAll(pageRequest)
+                .map(translateMapper::toDto);
+    }
+
+    @Override
+    public Page<Translate> searchTranslateForLesson(TranslateSearchRequest request) {
+        if(ObjectUtils.isEmpty(request.getLanguageId())){
+            throw new IllegalArgumentException("language id is null when try search translates");
+        }
+        if(ObjectUtils.isEmpty(request.getLessonId())){
+            throw new IllegalArgumentException("lesson id is null when try search translates");
+        }
+        PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
+        return translateRepository.searchTranslatesForLesson(request.getLanguageId(), request.getLessonId(), pageRequest)
+                .map(translateMapper::toDto);
     }
 
 }

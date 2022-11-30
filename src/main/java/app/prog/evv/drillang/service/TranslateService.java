@@ -16,4 +16,6 @@ public interface TranslateService {
 
     Page<Translate> searchTranslate(TranslateSearchRequest request);
 
+    Page<Translate> searchTranslateForLesson(TranslateSearchRequest request);
+
 }
