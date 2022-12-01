@@ -60,9 +60,6 @@ public class WordCardServiceImpl implements WordCardService {
     @Override
     public Page<WordCardDto> searchWordCards(WordCardSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
-        if (ObjectUtils.isNotEmpty(request.getLanguageId())) {
-            return wordCardRepository.findByLanguageId(pageRequest, request.getLanguageId()).map(wordCardMapper::toDto);
-        }
-        return wordCardRepository.findAll(pageRequest).map(wordCardMapper::toDto);
+        return wordCardRepository.search(request, pageRequest).map(wordCardMapper::toDto);
     }
 }
