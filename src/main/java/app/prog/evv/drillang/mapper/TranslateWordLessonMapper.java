@@ -13,8 +13,11 @@ public interface TranslateWordLessonMapper {
 
     @Mapping(target = "translateId", source = "translate.id")
     @Mapping(target = "lessonId", source = "wordLesson.id")
+    @Mapping(target = "pictureId", source = "translate.word1.pictureId")
     @Mapping(target = "word1", source = "translate.word1.word")
+    @Mapping(target = "audioId1", source = "translate.word1.audioId")
     @Mapping(target = "word2", source = "translate.word2.word")
+    @Mapping(target = "audioId2", source = "translate.word2.audioId")
     TranslateWLessonInfo toInfoDto(TranslateWordLessonEntity entity);
 
     TranslateWordLessonEntity toEntity(TranslateWordLesson dto);

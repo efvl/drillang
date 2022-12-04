@@ -13,9 +13,15 @@ public class TranslateWLessonInfo {
 
     private Long translateId;
 
+    private Long pictureId;
+
     private String word1;
 
+    private Long audioId1;
+
     private String word2;
+
+    private Long audioId2;
 
     private Long lessonId;
 

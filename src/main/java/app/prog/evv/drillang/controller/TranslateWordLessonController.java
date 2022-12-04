@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -38,6 +39,12 @@ public class TranslateWordLessonController {
     @PutMapping
     public ResponseEntity<TranslateWordLesson> updateTranslateWordLesson(@RequestBody TranslateWordLesson translateWLesson){
         return ResponseEntity.ok(translateWordLessonService.updateTranslateWordLesson(translateWLesson));
+    }
+
+    @Operation(description = "Update bunch of Translate Word Lessons")
+    @PutMapping("/bunch")
+    public ResponseEntity<List<TranslateWLessonInfo>> updateTranslateWordLessons(@RequestBody List<TranslateWordLesson> translateWLessons){
+        return ResponseEntity.ok().body(translateWordLessonService.updateTranslateWordLessons(translateWLessons));
     }
 
     @Operation(description = "Delete Translate Word Lesson")

@@ -6,6 +6,7 @@ import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
 import app.prog.evv.drillang.dto.translate.Translate;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Set;
 
 public interface TranslateWordLessonService {
@@ -15,6 +16,8 @@ public interface TranslateWordLessonService {
     TranslateWordLesson createTranslateWordLesson(TranslateWordLesson translateWordLesson);
 
     TranslateWordLesson updateTranslateWordLesson(TranslateWordLesson translateWordLesson);
+
+    List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons);
 
     void deleteTranslateWordLessonById(Long id);
 

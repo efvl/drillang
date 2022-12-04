@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -50,6 +51,23 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
             );
         }
         return updated;
+    }
+
+    @Override
+    public List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons) {
+        List<TranslateWordLessonEntity> entities = translateWordLessons.stream()
+                .map(trLesson -> {
+                    TranslateWordLessonEntity entity = translateWordLessonRepository.findById(trLesson.getId())
+                            .orElseThrow(() -> new EntityNotFoundException("translateWordEntity not found (id=)" + trLesson.getId()));
+                    entity.setAllAnswer(trLesson.getAllAnswer());
+                    entity.setCorrectAnswer(trLesson.getCorrectAnswer());
+                    entity.setTargetAnswer(trLesson.getTargetAnswer());
+                    return entity;
+                })
+                .collect(Collectors.toList());
+        return translateWordLessonRepository.saveAll(entities).stream()
+                .map(translateWordLessonMapper::toInfoDto)
+                .collect(Collectors.toList());
     }
 
     @Override
