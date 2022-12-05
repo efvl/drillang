@@ -12,8 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,20 +56,36 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
     }
 
     @Override
+    public TranslateWordLesson learnAgainTranslateWordLesson(TranslateWordLesson translateWordLesson) {
+        Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(translateWordLesson.getId());
+        TranslateWordLesson updated = new TranslateWordLesson();
+        if(existing.isPresent()){
+            existing.get().setCorrectAnswer(0);
+            updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
+        }
+        return updated;
+    }
+
+    @Override
     public List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons) {
-        List<TranslateWordLessonEntity> entities = translateWordLessons.stream()
-                .map(trLesson -> {
-                    TranslateWordLessonEntity entity = translateWordLessonRepository.findById(trLesson.getId())
-                            .orElseThrow(() -> new EntityNotFoundException("translateWordEntity not found (id=)" + trLesson.getId()));
+        Map<Long, TranslateWordLesson> map = translateWordLessons.stream()
+                .collect(Collectors.toMap(item -> item.getId(), Function.identity()));
+
+        List<TranslateWordLessonEntity> entities = translateWordLessonRepository.findAllById(map.keySet()).stream()
+                .map(entity -> {
+                    TranslateWordLesson trLesson = map.get(entity.getId());
                     entity.setAllAnswer(trLesson.getAllAnswer());
                     entity.setCorrectAnswer(trLesson.getCorrectAnswer());
                     entity.setTargetAnswer(trLesson.getTargetAnswer());
+                    entity.setCountDone(trLesson.getCountDone());
                     return entity;
                 })
                 .collect(Collectors.toList());
-        return translateWordLessonRepository.saveAll(entities).stream()
+
+        List<TranslateWLessonInfo> result = translateWordLessonRepository.saveAll(entities).stream()
                 .map(translateWordLessonMapper::toInfoDto)
                 .collect(Collectors.toList());
+        return result;
     }
 
     @Override

@@ -10,4 +10,6 @@ public interface TranslateWordLessonRepository extends BaseJpaRepository<Transla
 
     List<TranslateWordLessonEntity> findByWordLessonId(Long id);
 
+    List<TranslateWordLessonEntity> findByWordLessonIdAndTranslateId(Long wlId, Long trId);
+
 }

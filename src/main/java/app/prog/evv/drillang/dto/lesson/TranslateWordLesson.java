@@ -22,4 +22,6 @@ public class TranslateWordLesson {
 
     private int correctAnswer;
 
+    private int countDone;
+
 }

@@ -30,4 +30,7 @@ public class TranslateWordLessonEntity extends BaseUniqueEntity {
     @Column(name = "correctAnswer")
     private int correctAnswer;
 
+    @Column(name = "count_done")
+    private int countDone;
+
 }

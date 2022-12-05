@@ -41,6 +41,12 @@ public class TranslateWordLessonController {
         return ResponseEntity.ok(translateWordLessonService.updateTranslateWordLesson(translateWLesson));
     }
 
+    @Operation(description = "Learnn again for Translate Word Lesson")
+    @PutMapping("/again")
+    public ResponseEntity<TranslateWordLesson> learnAgainTranslateWordLesson(@RequestBody TranslateWordLesson translateWLesson){
+        return ResponseEntity.ok(translateWordLessonService.learnAgainTranslateWordLesson(translateWLesson));
+    }
+
     @Operation(description = "Update bunch of Translate Word Lessons")
     @PutMapping("/bunch")
     public ResponseEntity<List<TranslateWLessonInfo>> updateTranslateWordLessons(@RequestBody List<TranslateWordLesson> translateWLessons){

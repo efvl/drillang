@@ -17,6 +17,8 @@ public interface TranslateWordLessonService {
 
     TranslateWordLesson updateTranslateWordLesson(TranslateWordLesson translateWordLesson);
 
+    TranslateWordLesson learnAgainTranslateWordLesson(TranslateWordLesson translateWordLesson);
+
     List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons);
 
     void deleteTranslateWordLessonById(Long id);
