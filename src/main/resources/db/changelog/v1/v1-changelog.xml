@@ -21,4 +21,5 @@
     <include file="WCARD-create-translate-word-lesson-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-fk-to-translate-word-lesson-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-done-filed-to-twl-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-set-value-done-twl-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
