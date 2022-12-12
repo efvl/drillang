@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,11 @@ public class TranslateServiceImpl implements TranslateService {
         if(translate.getWord1() == null){
             throw new IllegalArgumentException("worCard1 for translate is null");
         }
+        if(translate.getWord2() == null){
+            throw new IllegalArgumentException("wordCard2 for translate is null");
+        }
         if(wordCardRepository.existsById(translate.getWord1().getId())){
+            translate.getWord2().setDateCreated(Instant.now());
             created = translateRepository.save(translateMapper.toEntity(translate));
         } else {
             throw new EntityNotFoundException(String.format("worCard not found (id=%d)", translate.getWord1().getId()));
