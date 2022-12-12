@@ -5,12 +5,10 @@ import app.prog.evv.drillang.entity.WordCardEntity;
 import app.prog.evv.drillang.entity.QWordCardEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +37,9 @@ public interface WordCardRepository extends BaseJpaRepository<WordCardEntity, Lo
         if(pageable.isPaged()){
             query.offset(pageable.getOffset()).limit(pageable.getPageSize());
         }
+        // default order
+        query.orderBy(wordCardEntity.dateCreated.desc());
+
         QueryResults<WordCardEntity> results = query.fetchResults();
         // Convert back to a normal spring search result.
         return new PageImpl<>(results.getResults(), pageable, results.getTotal());
