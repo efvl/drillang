@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/v1/word-lesson")
 @CrossOrigin
@@ -47,5 +49,11 @@ public class WordLessonController {
     @PostMapping("/search")
     public ResponseEntity<Page<WordLesson>> searchWordLessons(@RequestBody WordLessonSearchRequest searchRequest){
         return ResponseEntity.ok().body(wordLessonService.searchWordLessons(searchRequest));
+    }
+
+    @Operation(description = "Get all Lessons for selected fromLanguage")
+    @GetMapping("/from-lang/{fromLangId}")
+    public ResponseEntity<List<WordLesson>> getLessonByFromLang(@PathVariable(name = "fromLangId") Long fromLangId){
+        return ResponseEntity.ok().body(wordLessonService.getLessonsByFromLanguage(fromLangId));
     }
 }

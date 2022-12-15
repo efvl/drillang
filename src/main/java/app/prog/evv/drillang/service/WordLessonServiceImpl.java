@@ -10,7 +10,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class WordLessonServiceImpl implements WordLessonService {
@@ -55,5 +58,12 @@ public class WordLessonServiceImpl implements WordLessonService {
     public Page<WordLesson> searchWordLessons(WordLessonSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
         return wordLessonRepository.findAll(pageRequest).map(wordLessonMapper::toDto);
+    }
+
+    @Override
+    public List<WordLesson> getLessonsByFromLanguage(@NotNull Long fromLangId) {
+        return wordLessonRepository.findByFromLanguageId(fromLangId).stream()
+                .map(wordLessonMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

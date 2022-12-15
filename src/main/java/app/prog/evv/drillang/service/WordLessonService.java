@@ -4,6 +4,8 @@ import app.prog.evv.drillang.dto.lesson.WordLesson;
 import app.prog.evv.drillang.dto.lesson.WordLessonSearchRequest;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface WordLessonService {
 
     WordLesson findById(Long id);
@@ -15,5 +17,6 @@ public interface WordLessonService {
     void deleteWordLessonById(Long id);
 
     Page<WordLesson> searchWordLessons(WordLessonSearchRequest request);
-    
+
+    List<WordLesson> getLessonsByFromLanguage(Long fromLangId);
 }
