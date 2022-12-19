@@ -6,7 +6,7 @@ import app.prog.evv.drillang.entity.WordCardEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = {LangMapper.class, PictureFileMapper.class, AudioFileMapper.class})
+@Mapper(componentModel = "spring", uses = {LangMapper.class, PictureFileMapper.class, AudioFileMapper.class, TagMapper.class})
 public interface WordCardMapper {
 
     WordCardDto toDto(WordCardEntity entity);

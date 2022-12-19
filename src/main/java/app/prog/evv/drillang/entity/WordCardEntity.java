@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -35,5 +37,11 @@ public class WordCardEntity extends BaseUniqueEntity{
 
     @Column(name = "date_created")
     private Instant dateCreated;
+
+    @ManyToMany
+    @JoinTable(name="words_tags",
+            joinColumns = {@JoinColumn(name="word_id")},
+            inverseJoinColumns = {@JoinColumn(name="tag_id")})
+    private Set<TagEntity> tags = new HashSet<>();
 
 }

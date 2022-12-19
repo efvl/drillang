@@ -22,4 +22,7 @@
     <include file="WCARD-add-fk-to-translate-word-lesson-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-done-filed-to-twl-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-set-value-done-twl-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-skip-field-totwl-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-tag-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-words-tags-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
