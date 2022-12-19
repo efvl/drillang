@@ -1,5 +1,6 @@
 package app.prog.evv.drillang.dto.wordCard;
 
+import app.prog.evv.drillang.dto.lang.LanguageDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ public class WordCardSearchRequest {
 
     private Long[] ids;
 
-    private String language;
+    private LanguageDto language;
 
     private Long languageId;
 

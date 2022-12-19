@@ -19,12 +19,15 @@ public interface TranslateWordLessonService {
 
     TranslateWordLesson learnAgainTranslateWordLesson(TranslateWordLesson translateWordLesson);
 
+    TranslateWordLesson skipTranslateWordLesson(TranslateWordLesson translateWordLesson);
+
     List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons);
 
     void deleteTranslateWordLessonById(Long id);
 
     Page<TranslateWordLesson> searchTranslateWordLessons(TranslateWordLessonSearchRequest request);
 
-    Set<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId);
+    List<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId);
 
+    void setLearnLessonAgain(Long lessonId);
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-add-skip-field-to-twl-table" author="evv">
+        <addColumn tableName="translate_word_lesson">
+            <column name="skip" type="boolean" defaultValue="false"></column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

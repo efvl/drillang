@@ -33,4 +33,7 @@ public class TranslateWordLessonEntity extends BaseUniqueEntity {
     @Column(name = "count_done")
     private int countDone;
 
+    @Column(name = "skip")
+    private boolean skip;
+
 }

@@ -3,8 +3,10 @@ package app.prog.evv.drillang.controller;
 import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
+import app.prog.evv.drillang.dto.lesson.WordLesson;
 import app.prog.evv.drillang.service.TranslateWordLessonService;
 import io.swagger.v3.oas.annotations.Operation;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,10 +43,16 @@ public class TranslateWordLessonController {
         return ResponseEntity.ok(translateWordLessonService.updateTranslateWordLesson(translateWLesson));
     }
 
-    @Operation(description = "Learnn again for Translate Word Lesson")
+    @Operation(description = "Learn again for Translate Word Lesson")
     @PutMapping("/again")
     public ResponseEntity<TranslateWordLesson> learnAgainTranslateWordLesson(@RequestBody TranslateWordLesson translateWLesson){
         return ResponseEntity.ok(translateWordLessonService.learnAgainTranslateWordLesson(translateWLesson));
+    }
+
+    @Operation(description = "Skip learning for Translate Word Lesson")
+    @PutMapping("/skip")
+    public ResponseEntity<TranslateWordLesson> skipTranslateWordLesson(@RequestBody TranslateWordLesson translateWLesson){
+        return ResponseEntity.ok(translateWordLessonService.skipTranslateWordLesson(translateWLesson));
     }
 
     @Operation(description = "Update bunch of Translate Word Lessons")
@@ -67,7 +75,17 @@ public class TranslateWordLessonController {
 
     @Operation(description = "Get All Translates For Lesson by id")
     @GetMapping("/by-lesson/{id}")
-    public ResponseEntity<Set<TranslateWLessonInfo>> searchTranslateForLesson(@PathVariable Long id){
+    public ResponseEntity<List<TranslateWLessonInfo>> searchTranslateForLesson(@PathVariable Long id){
         return ResponseEntity.ok().body(translateWordLessonService.getTranslatesForLesson(id));
+    }
+
+    @Operation(description = "set Lesson learn again")
+    @PutMapping("/learn-again")
+    public ResponseEntity<WordLesson> setLearnLessonAgain(@RequestBody WordLesson wordLesson) {
+        if(ObjectUtils.isEmpty(wordLesson.getId())){
+            throw new IllegalArgumentException("wordLesson id is empty");
+        }
+        translateWordLessonService.setLearnLessonAgain(wordLesson.getId());
+        return ResponseEntity.ok().body(wordLesson);
     }
 }

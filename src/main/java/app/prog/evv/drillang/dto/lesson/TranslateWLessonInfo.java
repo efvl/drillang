@@ -33,4 +33,6 @@ public class TranslateWLessonInfo {
 
     private int countDone;
 
+    private boolean skip;
+
 }

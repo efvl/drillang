@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -61,6 +63,18 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
         TranslateWordLesson updated = new TranslateWordLesson();
         if(existing.isPresent()){
             existing.get().setCorrectAnswer(0);
+            existing.get().setSkip(false);
+            updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
+        }
+        return updated;
+    }
+
+    @Override
+    public TranslateWordLesson skipTranslateWordLesson(TranslateWordLesson translateWordLesson) {
+        Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(translateWordLesson.getId());
+        TranslateWordLesson updated = new TranslateWordLesson();
+        if(existing.isPresent()){
+            existing.get().setSkip(true);
             updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
         }
         return updated;
@@ -100,9 +114,14 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
     }
 
     @Override
-    public Set<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId) {
-        return translateWordLessonRepository.findByWordLessonId(lessonId).stream()
-                .map(translateWordLessonMapper::toInfoDto).collect(Collectors.toSet());
+    public List<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId) {
+        List<TranslateWordLessonEntity> result = translateWordLessonRepository.findByWordLessonIdOrderByIdDesc(lessonId);
+        return result.stream().map(translateWordLessonMapper::toInfoDto).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
+    public void setLearnLessonAgain(@NotNull Long lessonId) {
+        translateWordLessonRepository.setLessonLearnAgain(lessonId);
+    }
 }
