@@ -21,7 +21,6 @@ public class LangController {
 
     private final LangService langService;
 
-
     public LangController(LangService langService) {
         this.langService = langService;
     }
