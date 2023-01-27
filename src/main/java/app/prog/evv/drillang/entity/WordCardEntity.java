@@ -1,8 +1,6 @@
 package app.prog.evv.drillang.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -12,6 +10,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude="tags")
+@ToString(exclude = "tags")
 @Entity
 @Table(name = "word_card")
 public class WordCardEntity extends BaseUniqueEntity{
@@ -38,7 +38,9 @@ public class WordCardEntity extends BaseUniqueEntity{
     @Column(name = "date_created")
     private Instant dateCreated;
 
-    @ManyToMany
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+    })
     @JoinTable(name="words_tags",
             joinColumns = {@JoinColumn(name="word_id")},
             inverseJoinColumns = {@JoinColumn(name="tag_id")})
