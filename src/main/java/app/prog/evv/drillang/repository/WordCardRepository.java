@@ -7,10 +7,15 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public interface WordCardRepository extends BaseJpaRepository<WordCardEntity, Long>, QuerydslPredicateExecutor<WordCardEntity> {
@@ -30,6 +35,12 @@ public interface WordCardRepository extends BaseJpaRepository<WordCardEntity, Lo
             }
             if(ObjectUtils.isNotEmpty(searchRequest.getWord())) {
                 whereCause.and(wordCardEntity.word.likeIgnoreCase(searchRequest.getWord() + "%"));
+            }
+            if(!CollectionUtils.isEmpty(searchRequest.getTags())) {
+                final List<Long> tagIds = searchRequest.getTags().stream()
+                        .map(tag -> tag.getId())
+                        .collect(Collectors.toList());
+                whereCause.and(wordCardEntity.tags.any().id.in(tagIds));
             }
         }
 

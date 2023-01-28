@@ -85,7 +85,7 @@ public class TranslateServiceImpl implements TranslateService {
             throw new IllegalArgumentException("lesson id is null when try search translates");
         }
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
-        return translateRepository.searchTranslatesForLesson(request.getLanguageId(), request.getLessonId(), pageRequest)
+        return translateRepository.searchTranslatesForLesson(request, pageRequest)
                 .map(translateMapper::toDto);
     }
 
