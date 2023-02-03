@@ -5,12 +5,11 @@ import app.prog.evv.drillang.dto.tag.Tag;
 import app.prog.evv.drillang.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(path = "/v1/tag")
 @CrossOrigin
 public class TagController {

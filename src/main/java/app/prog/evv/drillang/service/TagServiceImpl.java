@@ -6,6 +6,8 @@ import app.prog.evv.drillang.entity.TagEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.TagMapper;
 import app.prog.evv.drillang.repository.TagRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class TagServiceImpl implements TagService{
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TagServiceImpl.class);
     private final TagRepository tagRepository;
-
     private final TagMapper tagMapper;
 
     public TagServiceImpl(TagRepository tagRepository, TagMapper tagMapper) {
@@ -34,6 +36,7 @@ public class TagServiceImpl implements TagService{
     @Override
     public void deleteTagById(Long id) {
         tagRepository.deleteById(id);
+        LOGGER.info("tag deleted id=" + id);
     }
 
     @Override
