@@ -6,6 +6,8 @@ import app.prog.evv.drillang.entity.LanguageEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.LangMapper;
 import app.prog.evv.drillang.repository.LangRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class LangServiceImpl implements LangService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(LangServiceImpl.class);
     private final LangRepository langRepository;
     private final LangMapper langMapper;
 
