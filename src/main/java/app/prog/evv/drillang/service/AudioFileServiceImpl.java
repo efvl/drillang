@@ -35,7 +35,7 @@ public class AudioFileServiceImpl implements AudioFileService {
     public AudioFileDto findById(Long id) {
         return audioFileRepository.findById(id)
                 .map(audioFileMapper::toDto)
-                .orElseThrow(() ->new EntityNotFoundException(String.format("audio file not found (id=%d)", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("audio file not found (id=%d)", id)));
     }
 
     @Override
