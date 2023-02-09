@@ -34,7 +34,7 @@ public class PictureFileServiceImpl implements PictureFileService {
     public PictureFileDto findById(Long id) {
         return pictureFileRepository.findById(id)
                 .map(pictureFileMapper::toDto)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("pucture file not found (id=%d)", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("picture file not found (id=%d)", id)));
     }
 
     @Override

@@ -2,6 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.wordAudio.AudioFileDto;
 import app.prog.evv.drillang.entity.AudioFileEntity;
+import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.AudioFileMapper;
 import app.prog.evv.drillang.repository.AudioFileRepository;
 import org.assertj.core.api.Assertions;
@@ -41,6 +42,19 @@ class AudioFileServiceImplTest {
         verify(audioFileRepository).findById(1L);
         verify(audioFileMapper).toDto(entity);
         Assertions.assertThat(actualDto).isEqualTo(expectedDto);
+    }
+
+    @Test
+    void findById_notExpectingEntity_shouldThrowException(){
+        //given
+        when(audioFileRepository.findById(100L)).thenReturn(Optional.empty());
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> audioFileService.findById(100L))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessageContaining("audio")
+                .hasMessageContaining("id=100");
     }
 
 }

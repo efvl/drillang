@@ -2,6 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.lang.LanguageDto;
 import app.prog.evv.drillang.entity.LanguageEntity;
+import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.LangMapper;
 import app.prog.evv.drillang.repository.LangRepository;
 import org.assertj.core.api.Assertions;
@@ -41,6 +42,19 @@ class LangServiceImplTest {
         verify(langRepository).findById(1L);
         verify(langMapper).toDto(entity);
         Assertions.assertThat(actualDto).isEqualTo(expectDto);
+    }
+
+    @Test
+    void findById_notExistingEntity_shouldThrowException() {
+        //given
+        when(langRepository.findById(100L)).thenReturn(Optional.empty());
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> langService.findById(100L))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessageContaining("language")
+                .hasMessageContaining("id=100");
     }
 
 }
