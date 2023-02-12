@@ -2,6 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.wordCard.WordCardDto;
 import app.prog.evv.drillang.entity.WordCardEntity;
+import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.WordCardMapper;
 import app.prog.evv.drillang.repository.WordCardRepository;
 import org.assertj.core.api.Assertions;
@@ -46,5 +47,17 @@ class WordCardServiceImplTest {
         Assertions.assertThat(actualDto).isEqualTo(actualDto);
     }
 
+    @Test
+    void findById_notExistingEntity_shouldThrowException() {
+        //given
+        when(wordCardRepository.findById(100L)).thenReturn(Optional.empty());
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> wordCardService.findById(100L))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessageContaining("word card")
+                .hasMessageContaining("id=100");
+    }
 
 }
