@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -32,7 +34,8 @@ class WordCardServiceImplTest {
         //given
         WordCardEntity entity = mock(WordCardEntity.class);
         WordCardDto expectedDto = mock(WordCardDto.class);
-        when(wordCardService.findById(1L)).thenReturn(expectedDto);
+        when(wordCardRepository.findById(1L)).thenReturn(Optional.ofNullable(entity));
+        when(mapper.toDto(entity)).thenReturn(expectedDto);
 
         //when
         WordCardDto actualDto = wordCardService.findById(1L);
