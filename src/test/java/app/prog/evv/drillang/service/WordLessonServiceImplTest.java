@@ -2,6 +2,7 @@ package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.dto.lesson.WordLesson;
 import app.prog.evv.drillang.entity.WordLessonEntity;
+import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.WordLessonMapper;
 import app.prog.evv.drillang.repository.WordLessonRepository;
 import org.assertj.core.api.Assertions;
@@ -43,6 +44,19 @@ class WordLessonServiceImplTest {
         verify(wordLessonRepository).findById(1L);
         verify(mapper).toDto(eq(entity));
         Assertions.assertThat(actualDto).isEqualTo(expectedDto);
+    }
+
+    @Test
+    void findById_notExistingEntity_shouldThrowException() {
+        //given
+        when(wordLessonRepository.findById(100L)).thenReturn(Optional.empty());
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> wordLessonService.findById(100L))
+                .isInstanceOf(EntityNotFoundException.class)
+                .hasMessageContaining("word lesson")
+                .hasMessageContaining("id=100");
     }
 
 }
