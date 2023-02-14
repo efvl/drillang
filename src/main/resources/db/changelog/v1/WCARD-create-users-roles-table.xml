@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-users-roles-table" author="evv">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="int8">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role_id" type="int8">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint constraintName="users_roles_pk"
+                             tableName="users_roles"
+                             columnNames="user_id, role_id"/>
+
+        <addForeignKeyConstraint baseTableName="users_roles" baseColumnNames="user_id"
+                                 constraintName="fk_users_roles_to_user"
+                                 referencedTableName="app_user" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="users_roles" baseColumnNames="role_id"
+                                 constraintName="fk_users_roles_to_role"
+                                 referencedTableName="app_role" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+    </changeSet>
+
+</databaseChangeLog>

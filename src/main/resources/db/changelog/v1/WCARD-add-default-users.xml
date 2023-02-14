@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-add-default-users" author="efimov.vv">
+        <insert tableName="app_user">
+            <column name="name">default</column>
+            <column name="login">default</column>
+            <column name="attr">default</column>
+            <column name="is_activated">true</column>
+        </insert>
+        <insert tableName="app_role">
+            <column name="name">DEFAULT</column>
+            <column name="attr">default</column>
+        </insert>
+        <insert tableName="users_roles">
+            <column name="user_id" valueComputed="(SELECT id from app_user WHERE attr ='default')"/>
+            <column name="role_id" valueComputed="(SELECT id from app_role WHERE attr ='default')"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

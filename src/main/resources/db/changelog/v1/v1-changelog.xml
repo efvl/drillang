@@ -25,4 +25,8 @@
     <include file="WCARD-add-skip-field-totwl-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-create-tag-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-create-words-tags-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-appuser-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-approle-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-users-roles-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-default-users.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
