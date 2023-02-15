@@ -1,6 +1,6 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.TagSearchRequest;
+import app.prog.evv.drillang.dto.tag.TagSearchRequest;
 import app.prog.evv.drillang.dto.tag.Tag;
 import app.prog.evv.drillang.entity.TagEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
