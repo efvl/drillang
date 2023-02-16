@@ -11,6 +11,7 @@ public interface AppUserMapper {
 
     AppUserEntity toEntity(AppUser dto);
 
+    @Mapping( target = "pwd", ignore = true)
     AppUser toDto(AppUserEntity entity);
 
     @Mapping(target = "pwd", source = "password")

@@ -1,5 +1,6 @@
 package app.prog.evv.drillang.service;
 
+import app.prog.evv.drillang.dto.user.AppUser;
 import app.prog.evv.drillang.dto.user.RegisterRequest;
 import app.prog.evv.drillang.dto.user.Role;
 import app.prog.evv.drillang.entity.AppRoleEntity;
@@ -41,6 +42,14 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
         }
         return new User(appUser.getLogin(), appUser.getPwd(), mapRolesEntityToAuthorities(appUser.getRoles()));
+    }
+
+    public AppUser getUserByLogin(String login) throws UsernameNotFoundException {
+        AppUserEntity appUser = userRepository.findByLogin(login);
+        if(appUser == null){
+            throw new UsernameNotFoundException(String.format("User %s not found", login));
+        }
+        return userMapper.toDto(appUser);
     }
 
     public UserDetails registerUser(RegisterRequest request) {

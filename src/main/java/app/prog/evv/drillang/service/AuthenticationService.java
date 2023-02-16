@@ -1,6 +1,7 @@
 package app.prog.evv.drillang.service;
 
 import app.prog.evv.drillang.auth.JwtService;
+import app.prog.evv.drillang.dto.user.AppUser;
 import app.prog.evv.drillang.dto.user.AuthenticationRequest;
 import app.prog.evv.drillang.dto.user.AuthenticationResponse;
 import app.prog.evv.drillang.dto.user.RegisterRequest;
@@ -30,8 +31,9 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         UserDetails user = userService.registerUser(request);
+        AppUser appUser = userService.getUserByLogin(request.getLogin());
         String jwtToken = jwtService.generateJwtToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, appUser);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -39,8 +41,9 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(request.getLogin(), request.getPassword())
         );
         UserDetails user = userService.loadUserByUsername(request.getLogin());
+        AppUser appUser = userService.getUserByLogin(request.getLogin());
         String jwtToken = jwtService.generateJwtToken(user);
-        return new AuthenticationResponse(jwtToken);
+        return new AuthenticationResponse(jwtToken, appUser);
     }
 
 }
