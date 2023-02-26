@@ -16,16 +16,29 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    @Operation(description = "user login")
-    @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> logIn(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok().body(authenticationService.authenticate(request));
-    }
-
     @Operation(description = "registration new user")
     @PostMapping("/registration")
     public ResponseEntity<AuthenticationResponse> registration(@RequestBody RegisterRequest request){
         return ResponseEntity.ok().body(authenticationService.register(request));
+    }
+
+    @Operation(description = "user login")
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> logIn(@RequestBody AuthenticationRequest request){
+        return ResponseEntity.ok().body(authenticationService.login(request));
+    }
+
+    @Operation(description = "user logout")
+    @PostMapping("/logout")
+    public ResponseEntity<String> logOut(@RequestBody AuthenticationRequest request){
+        authenticationService.logout(request);
+        return ResponseEntity.ok().body("logout is done");
+    }
+
+    @Operation(description = "get new refreshToken")
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthenticationResponse> refresh(@RequestBody RefreshToken request){
+        return ResponseEntity.ok().body(authenticationService.refresh(request));
     }
 
 }

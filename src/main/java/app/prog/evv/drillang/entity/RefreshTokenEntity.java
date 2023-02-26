@@ -17,7 +17,7 @@ public class RefreshTokenEntity extends BaseUniqueEntity {
     @JoinColumn(name = "user_id")
     AppUserEntity user;
 
-    @Column(name = "refresh_token")
-    String refreshToken;
+    @Column(name = "token")
+    String token;
 
 }

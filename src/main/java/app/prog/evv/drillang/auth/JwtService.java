@@ -1,5 +1,6 @@
 package app.prog.evv.drillang.auth;
 
+import app.prog.evv.drillang.exception.auth.TokenExpiredException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -28,20 +29,36 @@ public class JwtService {
     @Value("${auth.secret-key:12345}")
     private String SECRET_KEY;
 
-    @Value("${auth.expiration:60000}")
-    private long EXPIRATION;
+//    @Value("#{${auth.access-token.expirationMinutes:15} * 60 * 1000}")
+    @Value("#{${auth.access-token.expirationMinutes:15} * 1000}")
+    private long ACCESS_TOKEN_EXP;
 
-    public String generateJwtToken(UserDetails userDetails){
-        return generateJwtToken(new HashMap<>(), userDetails);
+//    @Value("#{${auth.refresh-token.expirationHours:24} * 60 * 60 * 1000}")
+    @Value("#{${auth.refresh-token.expirationHours:24} * 60 * 1000}")
+    private long REFRESH_TOKEN_EXP;
+
+    public String generateAccessToken(UserDetails userDetails){
+        return generateAccessToken(new HashMap<>(), userDetails);
     }
 
-    public String generateJwtToken(Map<String, Object> claims, UserDetails userDetails){
+    public String generateAccessToken(Map<String, Object> claims, UserDetails userDetails){
         return Jwts
                 .builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXP))
+                .signWith(getSingninKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    public String generateRefreshToken(Map<String, Object> claims, UserDetails userDetails){
+        return Jwts
+                .builder()
+                .setClaims(claims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_EXP))
                 .signWith(getSingninKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -64,7 +81,7 @@ public class JwtService {
         return userDetails.getUsername() != null && userDetails.getUsername().equals(username) && !isTokenExpired(token);
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
@@ -87,4 +104,6 @@ public class JwtService {
         final Claims claims = extractAllClaims(jwtToken);
         return claimsResolver.apply(claims);
     }
+
+
 }

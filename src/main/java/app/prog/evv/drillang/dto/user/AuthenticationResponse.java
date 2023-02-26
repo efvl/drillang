@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationResponse {
 
+    private AppUser user;
+
     private String accessToken;
 
-    private AppUser user;
+    private String refreshToken;
 
 }

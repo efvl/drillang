@@ -5,6 +5,7 @@ import app.prog.evv.drillang.dto.user.RegisterRequest;
 import app.prog.evv.drillang.dto.user.Role;
 import app.prog.evv.drillang.entity.AppRoleEntity;
 import app.prog.evv.drillang.entity.AppUserEntity;
+import app.prog.evv.drillang.exception.entity.AppUserValidationException;
 import app.prog.evv.drillang.mapper.AppUserMapper;
 import app.prog.evv.drillang.repository.AppRoleRepository;
 import app.prog.evv.drillang.repository.AppUserRepository;
@@ -55,7 +56,7 @@ public class UserService implements UserDetailsService {
     public UserDetails registerUser(RegisterRequest request) {
         AppUserEntity existingEntity = userRepository.findByLogin(request.getLogin());
         if(existingEntity != null){
-            throw new IllegalArgumentException(String.format("User '%s' already exists", request.getLogin()));
+            throw new AppUserValidationException(String.format("User '%s' already exists", request.getLogin()));
         }
         AppUserEntity newUser = userMapper.fromRegistrationRequest(request);
         AppRoleEntity defaultRole = roleRepository.findByName("DEFAULT");

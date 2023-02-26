@@ -31,11 +31,20 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public Optional<RefreshToken> findByUserId(Long userId) {
-        return repository.findByUserId(userId).stream()
-                .findFirst()
-                .map(mapper::toDto)
-                .map(Optional::ofNullable)
-                .get();
+        List<RefreshTokenEntity> list = repository.findByUserId(userId);
+        if(list.size() > 0){
+            return Optional.ofNullable(mapper.toDto(list.get(0)));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<RefreshToken> findByToken(String token) {
+        List<RefreshTokenEntity> list = repository.findByToken(token);
+        if(list.size() > 0){
+            return Optional.ofNullable(mapper.toDto(list.get(0)));
+        }
+        return Optional.empty();
     }
 
     @Override

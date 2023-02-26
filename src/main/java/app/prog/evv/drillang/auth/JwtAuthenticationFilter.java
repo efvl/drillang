@@ -1,6 +1,8 @@
 package app.prog.evv.drillang.auth;
 
+import app.prog.evv.drillang.exception.auth.TokenExpiredException;
 import app.prog.evv.drillang.service.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,6 +40,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         jwt = authHeader.substring(7); // token starts after the 'Bearer ' label
         username = jwtService.extractSubject(jwt);
+        if(username == null){
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetails = this.userService.loadUserByUsername(username);
             if(jwtService.isTokenValid(jwt, userDetails)){

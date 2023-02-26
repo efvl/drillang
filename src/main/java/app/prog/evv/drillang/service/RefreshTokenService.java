@@ -11,6 +11,8 @@ public interface RefreshTokenService {
 
     Optional<RefreshToken> findByUserId(Long userId);
 
+    Optional<RefreshToken> findByToken(String token);
+
     Optional<RefreshToken> create(RefreshToken refreshToken);
 
     Optional<RefreshToken> update(RefreshToken refreshToken);

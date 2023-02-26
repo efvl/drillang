@@ -10,6 +10,8 @@ public interface RefreshTokenRepository extends BaseJpaRepository<RefreshTokenEn
 
     List<RefreshTokenEntity> findByUserId(Long userId);
 
+    List<RefreshTokenEntity> findByToken(String token);
+
     void deleteByUserId(Long userId);
 
 }
