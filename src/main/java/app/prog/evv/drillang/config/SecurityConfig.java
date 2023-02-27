@@ -5,6 +5,7 @@ import app.prog.evv.drillang.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,8 +33,9 @@ public class SecurityConfig {
             .antMatchers("/v*/auth/login").permitAll()
             .antMatchers("/v*/auth/registration").permitAll()
             .antMatchers("/v*/auth/refresh").permitAll()
+            .antMatchers(HttpMethod.GET, "/v*/picture/*").permitAll()
+            .antMatchers(HttpMethod.GET,"/v*/audio/*").permitAll()
             .anyRequest().authenticated()
-//            .anyRequest().permitAll()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()

@@ -29,12 +29,10 @@ public class JwtService {
     @Value("${auth.secret-key:12345}")
     private String SECRET_KEY;
 
-//    @Value("#{${auth.access-token.expirationMinutes:15} * 60 * 1000}")
-    @Value("#{${auth.access-token.expirationMinutes:15} * 1000}")
+    @Value("#{${auth.access-token.expirationMinutes:15} * 60 * 1000}")
     private long ACCESS_TOKEN_EXP;
 
-//    @Value("#{${auth.refresh-token.expirationHours:24} * 60 * 60 * 1000}")
-    @Value("#{${auth.refresh-token.expirationHours:24} * 60 * 1000}")
+    @Value("#{${auth.refresh-token.expirationHours:24} * 60 * 60 * 1000}")
     private long REFRESH_TOKEN_EXP;
 
     public String generateAccessToken(UserDetails userDetails){
