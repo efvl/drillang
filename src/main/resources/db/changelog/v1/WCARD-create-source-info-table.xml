@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-source-info-table" author="evv">
+        <createTable tableName="source_info">
+            <column name="id" type="int8" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="source_type" type="varchar(50)"/>
+            <column name="path_link" type="varchar(512)"/>
+            <column name="name" type="varchar(512)"/>
+            <column name="authors" type="varchar(512)"/>
+            <column name="other" type="varchar(512)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="source_info"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
