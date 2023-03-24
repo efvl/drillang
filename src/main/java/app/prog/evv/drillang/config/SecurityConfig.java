@@ -34,7 +34,7 @@ public class SecurityConfig {
             .antMatchers("/v*/auth/registration").permitAll()
             .antMatchers("/v*/auth/refresh").permitAll()
             .antMatchers(HttpMethod.GET, "/v*/picture/*").permitAll()
-            .antMatchers(HttpMethod.GET,"/v*/audio/*").permitAll()
+            .antMatchers(HttpMethod.GET, "/v*/audio/*").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

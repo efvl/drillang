@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-tests-tags-table" author="evv">
+        <createTable tableName="tests_tags">
+            <column name="test_id" type="int8">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="tag_id" type="int8">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint constraintName="tests_tags_pk"
+                             tableName="tests_tags"
+                             columnNames="test_id, tag_id"/>
+
+        <addForeignKeyConstraint baseTableName="tests_tags" baseColumnNames="test_id"
+                                 constraintName="fk_tests_tags_to_test"
+                                 referencedTableName="test_card" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="tests_tags" baseColumnNames="tag_id"
+                                 constraintName="fk_tests_tags_to_tag"
+                                 referencedTableName="tag" referencedColumnNames="id"
+                                 deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+    </changeSet>
+
+</databaseChangeLog>
