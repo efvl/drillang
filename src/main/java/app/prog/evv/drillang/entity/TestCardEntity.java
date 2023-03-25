@@ -10,8 +10,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude="tags")
-@ToString(exclude = "tags")
 @Entity
 @Table(name = "test_card")
 public class TestCardEntity extends BaseUniqueEntity {
@@ -22,8 +20,12 @@ public class TestCardEntity extends BaseUniqueEntity {
     @Column(name = "answer")
     private String answer;
 
-//    @OneToMany(mappedBy = "testCard")
-//    private Set<TestCardSourceEntity> sources = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "testCard", cascade = {
+            CascadeType.MERGE
+    })
+    private Set<TestCardSourceEntity> sources = new HashSet<>();
 
     @Column(name = "picture_id")
     private Long pictureId;
@@ -34,6 +36,8 @@ public class TestCardEntity extends BaseUniqueEntity {
     @Column(name = "date_created")
     private Instant dateCreated;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToMany(cascade = {
             CascadeType.MERGE
     })

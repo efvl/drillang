@@ -18,6 +18,7 @@ public class TestCardDto {
     private String answer;
     private Long pictureId;
     private String codePart;
+    private Set<TestCardSourceDto> sources;
     private Instant dateCreated;
     private Set<TagEntity> tags;
 

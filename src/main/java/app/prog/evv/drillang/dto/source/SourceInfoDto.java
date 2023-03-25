@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SourceInfo {
+public class SourceInfoDto {
 
     private Long id;
     private SourceType sourceType;

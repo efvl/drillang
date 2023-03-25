@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-create-test-card-source-table" author="evv">
+        <createTable tableName="test_card_source">
+            <column name="id" type="int8" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="test_card_id" type="int8"/>
+            <column name="source_info_id" type="int8"/>
+            <column name="time_page" type="varchar(124)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

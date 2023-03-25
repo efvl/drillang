@@ -1,19 +1,19 @@
 package app.prog.evv.drillang.service;
 
-import app.prog.evv.drillang.dto.source.SourceInfo;
+import app.prog.evv.drillang.dto.source.SourceInfoDto;
 import app.prog.evv.drillang.dto.source.SourceInfoSearchRequest;
 import org.springframework.data.domain.Page;
 
 public interface SourceInfoService {
 
-    SourceInfo findById(Long id);
+    SourceInfoDto findById(Long id);
 
-    SourceInfo createSourceInfo(SourceInfo sourceInfo);
+    SourceInfoDto createSourceInfo(SourceInfoDto sourceInfoDto);
 
-    SourceInfo updateSourceInfo(SourceInfo sourceInfo);
+    SourceInfoDto updateSourceInfo(SourceInfoDto sourceInfoDto);
 
     void deleteSourceInfoById(Long id);
 
-    Page<SourceInfo> searchSourceInfo(SourceInfoSearchRequest request);
+    Page<SourceInfoDto> searchSourceInfo(SourceInfoSearchRequest request);
 
 }

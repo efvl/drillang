@@ -5,7 +5,7 @@ import app.prog.evv.drillang.dto.testCard.TestCardInfo;
 import app.prog.evv.drillang.entity.TestCardEntity;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = {PictureFileMapper.class, TagMapper.class})
+@Mapper(componentModel = "spring", uses = {PictureFileMapper.class, TagMapper.class, TestCardSourceMapper.class})
 public interface TestCardMapper {
 
     TestCardDto toDto(TestCardEntity entity);
