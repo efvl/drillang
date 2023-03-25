@@ -23,7 +23,7 @@ public class TestCardEntity extends BaseUniqueEntity {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(mappedBy = "testCard", cascade = {
-            CascadeType.MERGE
+            CascadeType.MERGE, CascadeType.REMOVE
     })
     private Set<TestCardSourceEntity> sources = new HashSet<>();
 
