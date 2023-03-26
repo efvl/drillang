@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -59,9 +60,18 @@ public class TestCardServiceImpl implements TestCardService {
     @Override
     public TestCardDto updateTestCard(TestCardDto testCardDto) {
         Optional<TestCardEntity> existing = testCardRepository.findById(testCardDto.getId());
+        TestCardEntity toUpdateEntity = testCardMapper.toEntity(testCardDto);
         TestCardDto updated = new TestCardDto();
         if(existing.isPresent()){
-            updated = testCardMapper.toDto(testCardRepository.save(testCardMapper.toEntity(testCardDto)));
+            List<Long> ids = existing.get().getSources().stream()
+                    .map(s -> s.getId())
+                    .collect(Collectors.toList());
+
+            Set<TestCardSourceEntity> sources = toUpdateEntity.getSources().stream()
+                    .peek(src -> src.setTestCard(toUpdateEntity))
+                    .collect(Collectors.toSet());
+            toUpdateEntity.setSources(sources);
+            updated = testCardMapper.toDto(testCardRepository.save(toUpdateEntity));
         }
         return updated;
     }

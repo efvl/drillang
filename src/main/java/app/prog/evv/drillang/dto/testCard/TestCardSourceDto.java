@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TestCardSourceDto {
 
+    private Long id;
     private TestCardDto testCard;
     private SourceInfoDto sourceInfo;
     private String timePage;
