@@ -61,11 +61,19 @@ public class TestCardServiceImpl implements TestCardService {
     public TestCardDto updateTestCard(TestCardDto testCardDto) {
         Optional<TestCardEntity> existing = testCardRepository.findById(testCardDto.getId());
         TestCardEntity toUpdateEntity = testCardMapper.toEntity(testCardDto);
+        List<Long> updIds = toUpdateEntity.getSources().stream()
+                .filter(s -> s.getId() != null)
+                .map(s -> s.getId())
+                .collect(Collectors.toList());
         TestCardDto updated = new TestCardDto();
         if(existing.isPresent()){
-            List<Long> ids = existing.get().getSources().stream()
+            List<Long> idsToDelete = existing.get().getSources().stream()
+                    .filter(s -> updIds.size() == 0 || !updIds.contains(s.getId()))
                     .map(s -> s.getId())
                     .collect(Collectors.toList());
+            if (idsToDelete.size() > 0) {
+                testCardSourceRepository.deleteAllById(idsToDelete);
+            }
 
             Set<TestCardSourceEntity> sources = toUpdateEntity.getSources().stream()
                     .peek(src -> src.setTestCard(toUpdateEntity))
