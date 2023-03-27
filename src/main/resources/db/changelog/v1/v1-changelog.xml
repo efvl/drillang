@@ -37,4 +37,6 @@
     <include file="WCARD-create-test-card-source-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-fk-to-test-card-source-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-create-lesson-tag-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-test-lesson-table.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-create-test-lesson-tags-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
