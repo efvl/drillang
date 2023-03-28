@@ -1,7 +1,5 @@
 package app.prog.evv.drillang.dto.testLesson;
 
-import app.prog.evv.drillang.entity.TestCardEntity;
-import app.prog.evv.drillang.entity.TestLessonEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestCardTestLessonDto {
+public class TCardTLessonInfo {
 
     private Long id;
-    private TestCardEntity testCard;
-    private TestLessonEntity testLesson;
+
+    private Long testCardId;
+    private String question;
+    private String answer;
+    private Long pictureId;
+    private String codePart;
+
+    private Long lessonId;
     private int targetAnswer;
     private int allAnswer;
     private int correctAnswer;
