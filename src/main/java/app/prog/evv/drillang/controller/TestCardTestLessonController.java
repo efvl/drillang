@@ -26,7 +26,7 @@ public class TestCardTestLessonController {
 
     @Operation(description = "Getting the Test Card Lesson ")
     @GetMapping("/{id}")
-    public ResponseEntity<TestCardTestLessonDto> getTranslateWordLesson(@PathVariable Long id){
+    public ResponseEntity<TestCardTestLessonDto> getTestCardTestLesson(@PathVariable Long id){
         return ResponseEntity.ok(tctLessonService.findById(id));
     }
 
