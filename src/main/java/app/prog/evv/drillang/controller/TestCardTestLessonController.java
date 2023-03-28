@@ -50,8 +50,8 @@ public class TestCardTestLessonController {
 
     @Operation(description = "Skip learning for Test Card Lesson")
     @PutMapping("/skip")
-    public ResponseEntity<TestCardTestLessonDto> skipTestCardTestLesson(@RequestBody TestCardTestLessonDto testCardTestLesson){
-        return ResponseEntity.ok(tctLessonService.skipTCardTLesson(testCardTestLesson));
+    public ResponseEntity<TCardTLessonInfo> skipTestCardTestLesson(@RequestBody TCardTLessonInfo tCardTLessonInfo){
+        return ResponseEntity.ok(tctLessonService.skipTCardTLesson(tCardTLessonInfo));
     }
 
     @Operation(description = "Update bunch of Test Card Lessons")

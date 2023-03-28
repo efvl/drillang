@@ -23,7 +23,7 @@ public interface TestCardTestLessonService {
 
     TestCardTestLessonDto learnAgainTCardTLesson(TestCardTestLessonDto tCardTLesson);
 
-    TestCardTestLessonDto skipTCardTLesson(TestCardTestLessonDto tCardTLesson);
+    TCardTLessonInfo skipTCardTLesson(TCardTLessonInfo tCardTLessonInfo);
 
     List<TCardTLessonInfo> updateTCardTLessons(List<TestCardTestLessonDto> tCardTLessons);
 

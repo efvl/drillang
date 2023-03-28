@@ -84,12 +84,12 @@ public class TestCardTestLessonServiceImpl implements TestCardTestLessonService 
     }
 
     @Override
-    public TestCardTestLessonDto skipTCardTLesson(TestCardTestLessonDto tCardTLesson) {
-        Optional<TestCardTestLessonEntity> existing = tCTLessonRepository.findById(tCardTLesson.getId());
-        TestCardTestLessonDto updated = new TestCardTestLessonDto();
+    public TCardTLessonInfo skipTCardTLesson(TCardTLessonInfo tCardTLessonInfo) {
+        Optional<TestCardTestLessonEntity> existing = tCTLessonRepository.findById(tCardTLessonInfo.getId());
+        TCardTLessonInfo updated = new TCardTLessonInfo();
         if(existing.isPresent()){
-            existing.get().setSkip(true);
-            updated = tCTLessonMapper.toDto(tCTLessonRepository.save(existing.get()));
+            existing.get().setSkip(!existing.get().isSkip());
+            updated = tCTLessonMapper.toInfoDto(tCTLessonRepository.save(existing.get()));
         }
         return updated;
     }
