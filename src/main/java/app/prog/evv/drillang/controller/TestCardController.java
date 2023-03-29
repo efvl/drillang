@@ -2,6 +2,7 @@ package app.prog.evv.drillang.controller;
 
 import app.prog.evv.drillang.dto.testCard.TestCardDto;
 import app.prog.evv.drillang.dto.testCard.TestCardSearchRequest;
+import app.prog.evv.drillang.dto.testLesson.TestCardTestLessonSearchRequest;
 import app.prog.evv.drillang.service.TestCardService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.data.domain.Page;
@@ -47,6 +48,12 @@ public class TestCardController {
     @PostMapping("/search")
     public ResponseEntity<Page<TestCardDto>> searchTestCards(@RequestBody TestCardSearchRequest searchRequest){
         return ResponseEntity.ok().body(testCardService.searchTestCards(searchRequest));
+    }
+
+    @Operation(description = "Search Test Cards For Lesson by searching params")
+    @PostMapping("/search/for-lesson")
+    public ResponseEntity<Page<TestCardDto>> searchTestCardsForLesson(@RequestBody TestCardTestLessonSearchRequest searchRequest){
+        return ResponseEntity.ok().body(testCardService.searchCardsNotInLesson(searchRequest));
     }
 
 }

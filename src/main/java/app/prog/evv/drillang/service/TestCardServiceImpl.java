@@ -4,6 +4,7 @@ import app.prog.evv.drillang.dto.testCard.TCardSourceInfo;
 import app.prog.evv.drillang.dto.testCard.TestCardDto;
 import app.prog.evv.drillang.dto.testCard.TestCardSearchRequest;
 import app.prog.evv.drillang.dto.testCard.TestCardSourceDto;
+import app.prog.evv.drillang.dto.testLesson.TestCardTestLessonSearchRequest;
 import app.prog.evv.drillang.entity.SourceInfoEntity;
 import app.prog.evv.drillang.entity.TestCardEntity;
 import app.prog.evv.drillang.entity.TestCardSourceEntity;
@@ -93,5 +94,11 @@ public class TestCardServiceImpl implements TestCardService {
     public Page<TestCardDto> searchTestCards(TestCardSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
         return testCardRepository.search(request, pageRequest).map(testCardMapper::toDto);
+    }
+
+    @Override
+    public Page<TestCardDto> searchCardsNotInLesson(TestCardTestLessonSearchRequest request) {
+        PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
+        return testCardRepository.searchCardsNotInLesson(request, pageRequest).map(testCardMapper::toDto);
     }
 }
