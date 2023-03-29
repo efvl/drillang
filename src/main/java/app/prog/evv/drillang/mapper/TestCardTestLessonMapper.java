@@ -6,7 +6,7 @@ import app.prog.evv.drillang.entity.TestCardTestLessonEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = { TestCardMapper.class, TestLessonMapper.class })
+@Mapper(componentModel = "spring", uses = { TestCardMapper.class, TagMapper.class, TestLessonMapper.class })
 public interface TestCardTestLessonMapper {
 
     TestCardTestLessonDto toDto(TestCardTestLessonEntity entity);
@@ -16,6 +16,7 @@ public interface TestCardTestLessonMapper {
     @Mapping(target = "pictureId", source = "testCard.pictureId")
     @Mapping(target = "question", source = "testCard.question")
     @Mapping(target = "answer", source = "testCard.answer")
+    @Mapping(target = "tags", source = "testCard.tags")
     TCardTLessonInfo toInfoDto(TestCardTestLessonEntity entity);
 
     TestCardTestLessonEntity toEntity(TestCardTestLessonDto dto);

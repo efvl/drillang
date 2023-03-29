@@ -1,8 +1,12 @@
 package app.prog.evv.drillang.dto.testLesson;
 
+import app.prog.evv.drillang.dto.tag.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +20,7 @@ public class TCardTLessonInfo {
     private String answer;
     private Long pictureId;
     private String codePart;
+    private List<Tag> tags = new ArrayList<>();
 
     private Long lessonId;
     private int targetAnswer;
