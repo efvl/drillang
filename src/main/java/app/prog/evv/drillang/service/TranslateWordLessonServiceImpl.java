@@ -74,7 +74,7 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
         Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(translateWordLesson.getId());
         TranslateWordLesson updated = new TranslateWordLesson();
         if(existing.isPresent()){
-            existing.get().setSkip(true);
+            existing.get().setSkip(!existing.get().isSkip());
             updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
         }
         return updated;
