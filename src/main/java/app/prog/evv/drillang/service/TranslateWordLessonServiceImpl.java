@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -59,22 +60,24 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
 
     @Override
     public TranslateWordLesson learnAgainTranslateWordLesson(TranslateWordLesson translateWordLesson) {
-        Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(translateWordLesson.getId());
-        TranslateWordLesson updated = new TranslateWordLesson();
-        if(existing.isPresent()){
-            existing.get().setCorrectAnswer(0);
-            existing.get().setSkip(false);
-            updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
-        }
-        return updated;
+        return patchTranslationWordLesson(translateWordLesson,
+                (twl) -> {
+                    twl.get().setCorrectAnswer(0);
+                    twl.get().setSkip(false);
+                });
     }
 
     @Override
     public TranslateWordLesson skipTranslateWordLesson(TranslateWordLesson translateWordLesson) {
-        Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(translateWordLesson.getId());
+        return patchTranslationWordLesson(translateWordLesson, (twl) -> twl.get().setSkip(!twl.get().isSkip()));
+    }
+
+    private TranslateWordLesson patchTranslationWordLesson(TranslateWordLesson twl,
+                                                            Consumer<Optional<TranslateWordLessonEntity>> patch){
+        Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(twl.getId());
         TranslateWordLesson updated = new TranslateWordLesson();
         if(existing.isPresent()){
-            existing.get().setSkip(!existing.get().isSkip());
+            patch.accept(existing);
             updated = translateWordLessonMapper.toDto(translateWordLessonRepository.save(existing.get()));
         }
         return updated;
