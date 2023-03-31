@@ -12,9 +12,11 @@ public class TranslateWLessonInfo {
     private Long id;
     private Long translateId;
     private Long pictureId;
+    private Long card1Id;
     private String word1;
     private String example1;
     private Long audioId1;
+    private Long card2Id;
     private String word2;
     private String example2;
     private Long audioId2;
