@@ -68,4 +68,38 @@ public interface TranslateRepository extends BaseJpaRepository<TranslateEntity, 
         // Convert back to a normal spring search result.
         return new PageImpl<>(results.getResults(), pageable, results.getTotal());
     }
+
+    default Page<TranslateEntity> search(TranslateSearchRequest searchRequest, Pageable pageable){
+
+        QTranslateEntity translateEntity = QTranslateEntity.translateEntity;
+
+        JPAQuery<TranslateEntity> query = new JPAQuery<>(getEm());
+
+        BooleanBuilder whereCause = new BooleanBuilder();
+        if(searchRequest != null){
+            if(ObjectUtils.isNotEmpty(searchRequest.getLanguageId())) {
+                whereCause.and(translateEntity.word1.language.id.eq(searchRequest.getLanguageId()));
+            }
+            if(ObjectUtils.isNotEmpty(searchRequest.getWord())) {
+                whereCause.and(translateEntity.word1.word.likeIgnoreCase(searchRequest.getWord() + "%"));
+            }
+            if(!CollectionUtils.isEmpty(searchRequest.getTags())) {
+                final List<Long> tagIds = searchRequest.getTags().stream()
+                        .map(tag -> tag.getId())
+                        .collect(Collectors.toList());
+                whereCause.and(translateEntity.word1.tags.any().id.in(tagIds));
+            }
+        }
+
+        query.from(translateEntity).where(whereCause);
+        if(pageable.isPaged()){
+            query.offset(pageable.getOffset()).limit(pageable.getPageSize());
+        }
+        // default order
+        query.orderBy(translateEntity.word1.dateCreated.desc());
+
+        QueryResults<TranslateEntity> results = query.fetchResults();
+        // Convert back to a normal spring search result.
+        return new PageImpl<>(results.getResults(), pageable, results.getTotal());
+    }
 }

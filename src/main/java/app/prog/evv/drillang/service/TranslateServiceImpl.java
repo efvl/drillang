@@ -72,8 +72,7 @@ public class TranslateServiceImpl implements TranslateService {
     @Override
     public Page<Translate> searchTranslate(TranslateSearchRequest request) {
         PageRequest pageRequest = PageRequest.of(request.getCurNumPage(), request.getSizeOfPage());
-        return translateRepository.findAll(pageRequest)
-                .map(translateMapper::toDto);
+        return translateRepository.search(request, pageRequest).map(translateMapper::toDto);
     }
 
     @Override
