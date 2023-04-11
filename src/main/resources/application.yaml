@@ -37,6 +37,6 @@ springdoc:
 auth:
   secret-key: 28472B4B6250655368566D597133743677397A244226452948404D635166546A
   access-token:
-    expirationMinutes: 15
+    expirationMinutes: 30
   refresh-token:
     expirationHours: 24
