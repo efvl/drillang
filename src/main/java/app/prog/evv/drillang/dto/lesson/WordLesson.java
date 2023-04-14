@@ -18,6 +18,8 @@ public class WordLesson {
 
     private LanguageDto toLanguage;
 
+    private Long translatesCount;
+
     private boolean reverse;
 
     private int countDone;

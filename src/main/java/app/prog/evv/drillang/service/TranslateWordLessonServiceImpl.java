@@ -3,12 +3,15 @@ package app.prog.evv.drillang.service;
 import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
+import app.prog.evv.drillang.dto.lesson.WordLessonProjection;
 import app.prog.evv.drillang.entity.TranslateWordLessonEntity;
 import app.prog.evv.drillang.exception.entity.EntityNotFoundException;
 import app.prog.evv.drillang.mapper.TranslateWordLessonMapper;
 import app.prog.evv.drillang.repository.TranslateWordLessonRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -126,5 +129,13 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
     @Transactional
     public void setLearnLessonAgain(@NotNull Long lessonId) {
         translateWordLessonRepository.setLessonLearnAgain(lessonId);
+    }
+
+    @Override
+    public Map<Long, Long> getTranslatesCountByLessons(List<Long> ids) {
+        List<WordLessonProjection> result = translateWordLessonRepository.getTranslatesCount(ids);
+        Map<Long, Long> resultMap = result.stream()
+                .collect(Collectors.toMap(WordLessonProjection::getLessonId, WordLessonProjection::getTrCount));
+        return resultMap;
     }
 }

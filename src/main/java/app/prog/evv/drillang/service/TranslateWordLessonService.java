@@ -3,11 +3,13 @@ package app.prog.evv.drillang.service;
 import app.prog.evv.drillang.dto.lesson.TranslateWLessonInfo;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLesson;
 import app.prog.evv.drillang.dto.lesson.TranslateWordLessonSearchRequest;
-import app.prog.evv.drillang.dto.translate.Translate;
+
+import app.prog.evv.drillang.dto.lesson.WordLessonProjection;
 import org.springframework.data.domain.Page;
+import org.springframework.data.util.Pair;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 public interface TranslateWordLessonService {
 
@@ -30,4 +32,6 @@ public interface TranslateWordLessonService {
     List<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId);
 
     void setLearnLessonAgain(Long lessonId);
+
+    Map<Long, Long> getTranslatesCountByLessons(List<Long> ids);
 }
