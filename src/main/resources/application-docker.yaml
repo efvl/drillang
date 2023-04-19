@@ -1,0 +1,42 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /dlang
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres-wcard_db-1:5432/wcard
+    username: vova
+    password: adminvova
+    driver-class-name: org.postgresql.Driver
+    autoCommit: false
+    hikari:
+      auto-commit: false
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog.xml
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+springdoc:
+  show-actuator: false
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger
+
+auth:
+  secret-key: 28472B4B6250655368566D597133743677397A244226452948404D635166546A
+  access-token:
+    expirationMinutes: 30
+  refresh-token:
+    expirationHours: 24

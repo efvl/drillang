@@ -149,7 +149,7 @@
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<configuration>
 					<changeLogFile>/src/main/resources/db/changelog/changelog.xml</changeLogFile>
-					<url>jdbc:postgresql://postgres-wcard_db-1:5432/wcard</url>
+					<url>jdbc:postgresql://${postgr.host}:5432/wcard</url>
 					<username>vova</username>
 					<password>adminvova</password>
 					<driver>org.postgresql.Driver</driver>
@@ -165,5 +165,24 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<postgr.host>localhost</postgr.host>
+			</properties>
+		</profile>
+		<profile>
+			<id>docker</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<postgr.host>postgres-wcard_db-1</postgr.host>
+			</properties>
+		</profile>
+	</profiles>
 </project>
