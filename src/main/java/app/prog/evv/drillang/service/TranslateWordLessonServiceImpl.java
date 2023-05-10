@@ -75,8 +75,13 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
         return patchTranslationWordLesson(translateWordLesson, (twl) -> twl.get().setSkip(!twl.get().isSkip()));
     }
 
+    @Override
+    public TranslateWordLesson updateOrderTranslateWordLesson(TranslateWordLesson translateWordLesson) {
+        return patchTranslationWordLesson(translateWordLesson, (twl) -> twl.get());
+    }
+
     private TranslateWordLesson patchTranslationWordLesson(TranslateWordLesson twl,
-                                                            Consumer<Optional<TranslateWordLessonEntity>> patch){
+                                                           Consumer<Optional<TranslateWordLessonEntity>> patch){
         Optional<TranslateWordLessonEntity> existing = translateWordLessonRepository.findById(twl.getId());
         TranslateWordLesson updated = new TranslateWordLesson();
         if(existing.isPresent()){

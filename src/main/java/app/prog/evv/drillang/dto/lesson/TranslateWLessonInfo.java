@@ -26,5 +26,6 @@ public class TranslateWLessonInfo {
     private int correctAnswer;
     private int countDone;
     private boolean skip;
+    private int wlOrder;
 
 }

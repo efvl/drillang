@@ -55,6 +55,12 @@ public class TranslateWordLessonController {
         return ResponseEntity.ok(translateWordLessonService.skipTranslateWordLesson(translateWLesson));
     }
 
+    @Operation(description = "Set order for Translate Word Lesson")
+    @PutMapping("/order")
+    public ResponseEntity<TranslateWordLesson> orderTranslateWordLesson(@RequestBody TranslateWordLesson translateWLesson){
+        return ResponseEntity.ok(translateWordLessonService.updateOrderTranslateWordLesson(translateWLesson));
+    }
+
     @Operation(description = "Update bunch of Translate Word Lessons")
     @PutMapping("/bunch")
     public ResponseEntity<List<TranslateWLessonInfo>> updateTranslateWordLessons(@RequestBody List<TranslateWordLesson> translateWLessons){

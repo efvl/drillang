@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet id="WCARD-set-wsorder-value" author="evv">
+        <update tableName="translate_word_lesson">
+            <column name="wl_order" value="0" />
+        </update>
+        <rollback>
+            <update tableName="translate_word_lesson">
+                <column name="wl_order" value="NULL" />
+            </update>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

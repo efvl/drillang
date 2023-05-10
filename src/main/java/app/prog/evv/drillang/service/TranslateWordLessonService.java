@@ -23,6 +23,8 @@ public interface TranslateWordLessonService {
 
     TranslateWordLesson skipTranslateWordLesson(TranslateWordLesson translateWordLesson);
 
+    TranslateWordLesson updateOrderTranslateWordLesson(TranslateWordLesson translateWordLesson);
+
     List<TranslateWLessonInfo> updateTranslateWordLessons(List<TranslateWordLesson> translateWordLessons);
 
     void deleteTranslateWordLessonById(Long id);
