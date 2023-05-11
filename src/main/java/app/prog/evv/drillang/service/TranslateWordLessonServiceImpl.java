@@ -77,7 +77,7 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
 
     @Override
     public TranslateWordLesson updateOrderTranslateWordLesson(TranslateWordLesson translateWordLesson) {
-        return patchTranslationWordLesson(translateWordLesson, (twl) -> twl.get());
+        return patchTranslationWordLesson(translateWordLesson, (twl) -> twl.get().setWlOrder(translateWordLesson.getWlOrder()));
     }
 
     private TranslateWordLesson patchTranslationWordLesson(TranslateWordLesson twl,
@@ -126,7 +126,7 @@ public class TranslateWordLessonServiceImpl implements TranslateWordLessonServic
 
     @Override
     public List<TranslateWLessonInfo> getTranslatesForLesson(Long lessonId) {
-        List<TranslateWordLessonEntity> result = translateWordLessonRepository.findByWordLessonIdOrderByIdDesc(lessonId);
+        List<TranslateWordLessonEntity> result = translateWordLessonRepository.findByWordLessonIdOrderByWlOrderAscIdDesc(lessonId);
         return result.stream().map(translateWordLessonMapper::toInfoDto).collect(Collectors.toList());
     }
 

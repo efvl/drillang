@@ -26,7 +26,7 @@ import java.util.List;
 public interface TranslateWordLessonRepository extends BaseJpaRepository<TranslateWordLessonEntity, Long>, QuerydslPredicateExecutor<TranslateWordLessonEntity> {
 
     List<TranslateWordLessonEntity> findByWordLessonId(Long id);
-    List<TranslateWordLessonEntity> findByWordLessonIdOrderByIdDesc(Long id);
+    List<TranslateWordLessonEntity> findByWordLessonIdOrderByWlOrderAscIdDesc(Long id);
 
     List<TranslateWordLessonEntity> findByWordLessonIdAndTranslateId(Long wlId, Long trId);
 
