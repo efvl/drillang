@@ -36,4 +36,6 @@ public class WordLessonEntity extends BaseUniqueEntity {
     @Column(name = "count_chars")
     private int countChars;
 
+    @Column(name = "use_order")
+    private boolean useOrder;
 }

@@ -26,4 +26,6 @@ public class WordLesson {
 
     private int countChars;
 
+    private boolean useOrder;
+
 }
