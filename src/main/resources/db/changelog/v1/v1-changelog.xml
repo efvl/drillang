@@ -44,4 +44,5 @@
     <include file="WCARD-set-wsorder-value.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-add-use-order-field-to-lesson-table.xml" relativeToChangelogFile="true"/>
     <include file="WCARD-set-use-order-to-default-value.xml" relativeToChangelogFile="true"/>
+    <include file="WCARD-add-editor-content-to-tcard-table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

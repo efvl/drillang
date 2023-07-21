@@ -16,6 +16,7 @@ public class TestCardDto {
     private Long id;
     private String question;
     private String answer;
+    private String editorContent;
     private Long pictureId;
     private String codePart;
     private Set<TestCardSourceDto> sources;

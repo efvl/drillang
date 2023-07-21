@@ -11,6 +11,7 @@ public class TestCardInfo {
 
     private Long id;
     private String question;
+    private String editorContent;
     private String answer;
     private Long pictureId;
     private String codePart;

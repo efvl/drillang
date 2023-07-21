@@ -20,6 +20,9 @@ public class TestCardEntity extends BaseUniqueEntity {
     @Column(name = "answer")
     private String answer;
 
+    @Column(name= "editor_content")
+    private String editorContent;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @OneToMany(mappedBy = "testCard", cascade = {
