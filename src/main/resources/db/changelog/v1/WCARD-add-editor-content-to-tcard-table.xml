@@ -6,7 +6,7 @@
 
     <changeSet id="WCARD-add-editor-content-to-tcard-table" author="evv">
         <addColumn tableName="test_card">
-            <column name="editor_content" type="string"/>
+            <column name="editor_content" type="text"/>
         </addColumn>
     </changeSet>
 </databaseChangeLog>
